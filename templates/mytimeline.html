@@ -1,0 +1,368 @@
+{% extends'base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/twitter.css">
+    <link rel="stylesheet" href="../static/css/xiunoui.css">
+{% endblock %}
+{% block body %}
+    {{ super() }}
+
+    <div class="container">
+        <div class="content">
+            <div class="content-header" pid="764" id="firstpost">
+                <!-- <div class="tw-header-inner"> -->
+                  <div class="reply-form fixed" id="post_create_dl" >
+                      <div class="reply-inner clearfix">
+                          <form id="quick_post_form" action="post-create-105-quick.htm" method="post">
+                              <textarea class="input-body" name="message"></textarea>
+                              <!-- <div class="post-button-left">
+                                  <a href="post-create-105.htm" target="_blank">编辑器</a>
+                              </div> -->
+                              <div class="post-button-right">
+                                  <button class="Button Button--primary" type="submit" loading-text="正在提交...">
+                                      <span class="submit-button-text">发表</span>
+                                  </button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+                <!-- </div> -->
+            </div>
+
+            <ol class="reply-items" id="postlist">
+
+
+                <li class="reply-item" pid="976">
+                    <div class="reply-content">
+                        <a href="user-0-976.htm" class="item-user">
+                            <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客" width="48px"
+                                 height="48px">
+                            <strong class="item-nickname">游客</strong>
+                        </a>
+                        <small class="time">
+                            <span class="point" title="回复时间">·</span>
+                            17天前
+                        </small>
+                        <div class="right-text">
+                            <span class="floor">1</span>
+                        </div>
+                        <div class="item-message post" pid="976">
+                            润体乳吗
+                        </div>
+                        <div class="post-actions clearfix">
+                            <span class="left web-icon icon-reply" title="回复"></span>
+                        </div>
+                    </div>
+                </li>
+
+            </ol>
+
+            <div class="stream-footer">
+                <div class="stream-end-inner">
+                    <button class="Button win-back">已加载全部回复，点击返回</button>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard">
+            <div class="mini-profile">
+                <div class="profile-summary">
+                    <div class="profile-content">
+                        <img src="{{ url_for('static', filename='img/01.png') }}">
+                        <b>游客</b>
+                        <small>登录后才能发帖哦~</small>
+                    </div>
+                </div>
+                <div class="profile-bottom">
+                    <div class="user-intro">
+                        <div class="signin-wrapper">
+                            <form class="signin" method="POST" id="login_form" action="user-login.htm">
+                                <fieldset>
+                                    <div class="field">
+                                        <input class="form-control" type="text" maxlength="26" name="account"
+                                               placeholder="邮件地址或昵称">
+                                    </div>
+                                    <div class="field">
+                                        <input class="form-control" type="password" maxlength="16" name="password"
+                                               placeholder="密码">
+                                    </div>
+                                </fieldset>
+                                <div class="clearfix">
+                                    <button type="submit" class="Button Button--primary" loading-text="正在登录...">
+                                        登录
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="text-list fixed" style="width:290px;">
+                <div class="text-inner">
+                    <div class="text-module-header">
+                        <h3>作者帖子</h3>
+                    </div>
+                    <ul class="text-items">
+                        <li><a href="thread-139.htm" title="【模板】Flarum For Xiuno4 插件形式模板"> · 【模板】Flarum For Xiuno4
+                            插件形式模板</a></li>
+                        <li><a href="thread-121.htm" title="试着用 discuz 改了下模板"> · 试着用 discuz 改了下模板</a></li>
+                        <li><a href="thread-116.htm" title="宝贝儿小心近视眼啊"> · 宝贝儿小心近视眼啊</a></li>
+                        <li><a href="thread-115.htm" title="这名字好尴尬"> · 这名字好尴尬</a></li>
+                        <li><a href="thread-114.htm" title="normalize.css 更新到 4.1.1 啦"> · normalize.css 更新到 4.1.1 啦</a>
+                        </li>
+                        <li><a href="thread-113.htm" title="手机版演示可以查看 flarum.cc/mobile"> · 手机版演示可以查看
+                            flarum.cc/mobile</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="site-footer">
+                <div class="footer-inner">
+                    <div class="footer-copyright">
+                        © 2016 <a href="http://flarum.cc/" target="_blank">flarum</a>
+                        <span class="point">♥</span> Powered by
+                        <a href="http://bbs.xiuno.com/" target="_blank">Xiuno BBS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <!-- <script id="script_data">
+        var new_thread_days = 3;
+        var allowpost = 1;
+        var tid = 105;
+        var thread = {
+            "fid": "6",
+            "tid": "105",
+            "top": "0",
+            "uid": "1",
+            "subject": "界面比较清爽的类论坛网站",
+            "url_on": "0",
+            "create_date": "1466415041",
+            "last_date": "1473671004",
+            "views": "532",
+            "posts": "4",
+            "agrees": "1",
+            "images": "1",
+            "files": "0",
+            "mods": "0",
+            "closed": "0",
+            "firstpid": "764",
+            "lastuid": "1",
+            "lastpid": "1015",
+            "create_date_fmt": "2月前",
+            "last_date_fmt": "6小时前",
+            "username": "flarum",
+            "user_avatar_url": "upload/avatar/000/1.png?1466152566",
+            "forumname": "论坛",
+            "lastusername": "flarum",
+            "seo_url": "",
+            "url": "thread-105.htm",
+            "user_url": "user-1.htm",
+            "posts_class": "posts_0",
+            "agrees_class": "agrees_0",
+            "thread_class": "thread_agrees_0",
+            "top_class": ""
+        };
+    </script>
+    <script>
+        $(function () {
+            var jform = $('#login_form');
+            var jaccount = jform.find('input[name="account"]').focus();
+            var jpassword = jform.find('input[name="password"]');
+            var jsubmit = jform.find('button[type="submit"]');
+            jform.off('submit').on('submit', function () {
+                //jsubmit.off('click').on('click', function() {
+                if (!jaccount.val()) {
+                    jaccount.popover('请输入 Email').focus();
+                    return false;
+                } else if (!jpassword.val()) {
+                    jpassword.popover('请输入密码').focus();
+                    return false;
+                }
+
+                var postdata = "account=" + jaccount.val() + "&password=" + $.md5(jpassword.val());
+                jsubmit.button('loading');
+                $.xpost(jform.attr('action'), postdata, function (code, message) {
+                    if (code == 0) {
+                        jsubmit.button('登录成功');
+                        //$.pdata('user', user);
+                        $.pdata('myagreelist', message.myagreelist);
+                        // 服务端已经设置了 cookie
+                        //$.cookie('bbs_token', message.token);
+                        setTimeout(function () {
+                            window.location = './';
+                        }, 1000);
+                    } else if (code > 0) {
+                        if (code == 1) jaccount.popover(message).focus();
+                        if (code == 2) jpassword.popover(message).focus();
+                        jsubmit.button('reset');
+                    } else if (code < 0) {
+                        alert(message);
+                        jsubmit.button('reset');
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+    <div id="scroll_top" title="返回顶部"></div>
+
+    <script id="script_data">
+        // 全局的数据
+        var fid = 6;                  // 当前激活的 fid
+        var forumlist = {
+            "1": {
+                "fid": "1",
+                "name": "xiuno",
+                "rank": "9",
+                "threads": "109",
+                "todayposts": "0",
+                "todaythreads": "0",
+                "brief": "和大家分享小众程序吧！",
+                "accesson": "0",
+                "orderby": "0",
+                "create_date": "1473382803",
+                "icon": "1445419671",
+                "moduids": "71",
+                "seo_title": "轻论坛, 微社区, xiuno",
+                "seo_keywords": "轻论坛, 微社区, xiuno",
+                "create_date_fmt": "2016-9-9",
+                "icon_url": "upload/forum/1.png",
+                "accesslist": [],
+                "modlist": {
+                    "71": {
+                        "uid": "71",
+                        "gid": "4",
+                        "username": "Javon",
+                        "threads": "1",
+                        "posts": "0",
+                        "myagrees": "0",
+                        "agrees": "0",
+                        "last_agree_date": "0",
+                        "credits": "0",
+                        "golds": "0",
+                        "rmbs": "0",
+                        "create_date": "1453711525",
+                        "login_ip": "611197434",
+                        "login_date": "1453711525",
+                        "logins": "1",
+                        "avatar": "1453711525",
+                        "create_date_fmt": "2016-01-25",
+                        "login_ip_fmt": "36.110.33.250",
+                        "login_date_fmt": "2016-01-25",
+                        "groupname": "版主组",
+                        "avatar_url": "upload/avatar/000/71.png?1453711525",
+                        "online_status": 1
+                    }
+                },
+                "newtids": {"139": 1473606525, "6": 1473565365, "98": 1473564010}
+            },
+            "2": {
+                "fid": "2",
+                "name": "CMS",
+                "rank": "7",
+                "threads": "7",
+                "todayposts": "0",
+                "todaythreads": "0",
+                "brief": "",
+                "accesson": "0",
+                "orderby": "0",
+                "create_date": "1473382764",
+                "icon": "1445419699",
+                "moduids": "",
+                "seo_title": "cms,phpcms,开源cms",
+                "seo_keywords": "cms,phpcms,开源cms",
+                "create_date_fmt": "2016-9-9",
+                "icon_url": "upload/forum/2.png",
+                "accesslist": [],
+                "modlist": [],
+                "newtids": []
+            },
+            "4": {
+                "fid": "4",
+                "name": "框架",
+                "rank": "6",
+                "threads": "3",
+                "todayposts": "0",
+                "todaythreads": "0",
+                "brief": "",
+                "accesson": "0",
+                "orderby": "0",
+                "create_date": "1473382908",
+                "icon": "0",
+                "moduids": "",
+                "seo_title": "框架交流",
+                "seo_keywords": "框架,css框架,bootstrap,cutestrap,superui,nec,nej,快切,uikit,pure,mater",
+                "create_date_fmt": "2016-9-9",
+                "icon_url": "static/forum.png",
+                "accesslist": [],
+                "modlist": [],
+                "newtids": []
+            },
+            "3": {
+                "fid": "3",
+                "name": "聊天",
+                "rank": "5",
+                "threads": "15",
+                "todayposts": "0",
+                "todaythreads": "0",
+                "brief": "",
+                "accesson": "0",
+                "orderby": "0",
+                "create_date": "1463968316",
+                "icon": "0",
+                "moduids": "",
+                "seo_title": "",
+                "seo_keywords": "",
+                "create_date_fmt": "2016-5-23",
+                "icon_url": "static/forum.png",
+                "accesslist": [],
+                "modlist": [],
+                "newtids": []
+            },
+            "6": {
+                "fid": "6",
+                "name": "论坛",
+                "rank": "4",
+                "threads": "3",
+                "todayposts": "0",
+                "todaythreads": "0",
+                "brief": "",
+                "accesson": "0",
+                "orderby": "0",
+                "create_date": "1473382950",
+                "icon": "0",
+                "moduids": "",
+                "seo_title": "论坛程序交流分享",
+                "seo_keywords": "论坛,轻论坛,微论坛,xiuno,startbbs,flarum",
+                "create_date_fmt": "2016-9-9",
+                "icon_url": "static/forum.png",
+                "accesslist": [],
+                "modlist": [],
+                "newtids": {"105": 1473671004}
+            }
+        };     // 板块数据，包含 new_tids
+        var new_thread_days = 3;
+    </script> -->
+
+    <!-- <script src="xiunoui/zepto.js"></script>
+     -->
+    <!-- <script src="xiunoui/jquery-1.11.1.min.js"></script>
+    <script src="xiunoui/xiuno.js"></script>
+    <script src="xiunoui/dialog.js"></script>
+    <script src="xiunoui/md5.js"></script>
+    <script src="static/bbs.js"></script>
+    <script src="pc/view/pc.js"></script>
+    <script src="pc/view/js/baymax.js"></script>
+
+    <script>
+        render_header();
+        render_forumlist();
+    </script> -->
+
+
+{% endblock %}
