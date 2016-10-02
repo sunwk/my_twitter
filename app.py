@@ -10,11 +10,14 @@ from models.todo import Todo
 from models.user import User
 from models.node import Node
 from models.topic import Topic
+from models.tweet import Tweet
 
 from routes.todo import main as routes_todo
 from routes.node import main as routes_node
 from routes.topic import main as routes_topic
 from routes.showpage import main as routes_showpage
+from routes.timeline import main as routes_timeline
+
 from api.auth import main as api_auth
 
 
@@ -27,6 +30,7 @@ def register_routes(app):
     app.register_blueprint(routes_todo, url_prefix='/todo')
     app.register_blueprint(routes_node, url_prefix='/node')
     app.register_blueprint(routes_topic, url_prefix='/topic')
+    app.register_blueprint(routes_timeline, url_prefix='/timeline')
     app.register_blueprint(routes_showpage)
     app.register_blueprint(api_auth, url_prefix='/api')
 
@@ -68,6 +72,6 @@ def configure_manager():
 if __name__ == '__main__':
     configure_manager()
     configure_app()
-    # manager.run()
-    app.run(debug=True)
+    manager.run()
+    # app.run(debug=True)
 # gunicorn -b '0.0.0.0:80' redischat:app

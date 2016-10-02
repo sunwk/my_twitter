@@ -36,16 +36,16 @@
                                             </div>
                                             <div class="modal-body">
                                                 <input id="id-register-username" type="text" class="form-control"
-                                                       placeholder="请输入用户名">
+                                                       placeholder="用户名大于三位">
                                                 <br>
                                                 <input id="id-register-password" type="text" class="form-control"
-                                                       placeholder="请输入密码">
+                                                       placeholder="密码大于三位">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                                     Close
                                                 </button>
-                                                <button id="id-button-sign" type="button" class="btn btn-primary">
+                                                <button id="id-button-register" type="button" class="btn btn-primary">
                                                     Submit
                                                 </button>
                                             </div>
@@ -123,6 +123,7 @@
                 url: url,
                 type: 'post',
                 data: data,
+                contentType: 'application/json',
                 success: function (r) {
                     if (r.success) {
                         location.href = r.next
@@ -134,10 +135,10 @@
             $.ajax(request);
         };
 
-        var log = function () {
+        var log_info = function () {
             console.log('点击登录');
-            var username = $('#id-login-username');
-            var password = $('#id-login-password');
+            var username = $('#id-login-username').val();
+            var password = $('#id-login-password').val();
             var data = {
                 username: username,
                 password: password
@@ -147,14 +148,15 @@
             post(url, parsed_data)
         };
 
-        var sign = function () {
+        var reg_info = function () {
             console.log('点击注册');
-            var username = $('#id-register-username');
-            var password = $('#id-register-password');
+            var username = $('#id-register-username').val();
+            var password = $('#id-register-password').val();
             var data = {
                 username: username,
                 password: password
             };
+            console.log('注册账户密码', data);
             var parsed_data = JSON.stringify(data);
             var url = '/api/register';
             post(url, parsed_data)
@@ -162,11 +164,17 @@
 
         var logIn = function () {
             var button = $('#id-button-login');
-            button.on('click', logPost)
+            button.on('click', log_info)
+        };
+
+        var register = function () {
+            var button = $('#id-button-register');
+            button.on('click', reg_info)
         };
 
         var __main = function () {
-            logIn()
+            logIn();
+            register()
         };
 
         $('document').ready(function () {
