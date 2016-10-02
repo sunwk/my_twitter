@@ -14,7 +14,7 @@ from models.topic import Topic
 from routes.todo import main as routes_todo
 from routes.node import main as routes_node
 from routes.topic import main as routes_topic
-
+from routes.showpage import main as routes_showpage
 
 app = Flask(__name__)
 db_path = 'todo.sqlite'
@@ -25,6 +25,7 @@ def register_routes(app):
     app.register_blueprint(routes_todo, url_prefix='/todo')
     app.register_blueprint(routes_node, url_prefix='/node')
     app.register_blueprint(routes_topic, url_prefix='/topic')
+    app.register_blueprint(routes_showpage, url_prefix='/showpage')
 
 
 def configure_app():
@@ -47,7 +48,7 @@ def server():
     # app = configured_app()
     config = dict(
         debug=True,
-        host='0.0.0.0',
+        host='127.0.0.1',
         port=3000,
     )
     app.run(**config)
