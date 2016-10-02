@@ -38,7 +38,7 @@ def log(*args):
     t = time.time()
     tt = time.strftime(r'%Y/%m/%d %H:%M:%S', time.localtime(t))
     print(tt, *args)
-    with open('log.txt', 'a') as f:
+    with open('log.txt', 'a', encoding='utf-8') as f:
         f.write('{} : {}\n'.format(tt, *args))
         f.close()
 

@@ -35,10 +35,10 @@
                                                         class="sr-only">Close</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <input id="id-input-title" type="text" class="form-control"
+                                                <input id="id-register-username" type="text" class="form-control"
                                                        placeholder="请输入用户名">
                                                 <br>
-                                                <input id="id-input-title" type="text" class="form-control"
+                                                <input id="id-register-password" type="text" class="form-control"
                                                        placeholder="请输入密码">
                                             </div>
                                             <div class="modal-footer">
@@ -76,10 +76,10 @@
                                                         class="sr-only">Close</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <input id="id-input-username" type="text" class="form-control"
+                                                <input id="id-login-username" type="text" class="form-control"
                                                        placeholder="请输入用户名">
                                                 <br>
-                                                <input id="id-input-password" type="text" class="form-control"
+                                                <input id="id-login-password" type="text" class="form-control"
                                                        placeholder="请输入密码">
                                             </div>
                                             <div class="modal-footer">
@@ -118,18 +118,11 @@
     <!-- /.intro-header -->
 
     <script>
-        var postAuth = function () {
-            console.log('点击登录');
-            var username = $('#id-input-username');
-            var password = $('#id-input-password');
-            var data = {
-                username: username,
-                password: password
-            };
-            var parsed_data = JSON.stringify(data);
+        var post = function (url, data) {
             var request = {
-                url: '/api/login',
+                url: url,
                 type: 'post',
+                data: data,
                 success: function (r) {
                     if (r.success) {
                         location.href = r.next
@@ -141,9 +134,35 @@
             $.ajax(request);
         };
 
+        var log = function () {
+            console.log('点击登录');
+            var username = $('#id-login-username');
+            var password = $('#id-login-password');
+            var data = {
+                username: username,
+                password: password
+            };
+            var parsed_data = JSON.stringify(data);
+            var url = '/api/login';
+            post(url, parsed_data)
+        };
+
+        var sign = function () {
+            console.log('点击注册');
+            var username = $('#id-register-username');
+            var password = $('#id-register-password');
+            var data = {
+                username: username,
+                password: password
+            };
+            var parsed_data = JSON.stringify(data);
+            var url = '/api/register';
+            post(url, parsed_data)
+        };
+
         var logIn = function () {
             var button = $('#id-button-login');
-            button.on('click', postAuth)
+            button.on('click', logPost)
         };
 
         var __main = function () {

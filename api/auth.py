@@ -26,14 +26,23 @@ def login():
     return jsonify(r)
 
 
-
+# 处理注册的请求  POST
 @main.route('/register', methods=['POST'])
 def register():
-    u = User(request.form)
+    form = request.get_json()
+    u = User(form)
+    r = {
+        'success': True
+    }
     if u.valid():
         log('注册成功，已跳转到内容页面')
         u.save()
-        return redirect(url_for('login_view'))
+        r['next'] = request.args.get(url_for('routes.show_view'))
+        session.permanent = True
+        session['user_id'] = u.id
     else:
         log('用户名或密码不合规范，需重新输入')
-        return redirect(url_for('register_view'))
+        r['success'] = False
+        r['message'] = '用户名或密码不合规范，需重新输入'
+    return jsonify(r)
+
