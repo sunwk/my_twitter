@@ -20,16 +20,14 @@ class User(db.Model, ModelMixin):
     visit = db.Column(db.Integer)
     sex = db.Column(db.String())
 
-    tweets = db.relationship('Tweet', backref='user')
-    comments = db.relationship('Comment', backref='user')
-
     def __init__(self, form):
         super(User, self).__init__()
-        self.visit = int(0)
-        self.username = form.get('username', '')
-        self.password = sha1_hashed(form.get('password', ''))
-        self.signature = form.get('signature', '')
-        self.sex = form.get('sex', '')
+        if form is not None:
+            self.visit = int(0)
+            self.username = form.get('username', '')
+            self.password = sha1_hashed(form.get('password', ''))
+            self.signature = form.get('signature', '')
+            self.sex = form.get('sex', '')
 
     def visitors_add(self):
         self.visit += 1

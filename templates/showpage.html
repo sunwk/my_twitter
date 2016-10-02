@@ -76,17 +76,17 @@
                                                         class="sr-only">Close</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <input id="id-input-title" type="text" class="form-control"
+                                                <input id="id-input-username" type="text" class="form-control"
                                                        placeholder="请输入用户名">
                                                 <br>
-                                                <input id="id-input-title" type="text" class="form-control"
+                                                <input id="id-input-password" type="text" class="form-control"
                                                        placeholder="请输入密码">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                                     Close
                                                 </button>
-                                                <button id="id-button-log" type="button" class="btn btn-primary">
+                                                <button id="id-button-login" type="button" class="btn btn-primary">
                                                     Submit
                                                 </button>
                                             </div>
@@ -117,13 +117,43 @@
     </div>
     <!-- /.intro-header -->
 
+    <script>
+        var postAuth = function () {
+            console.log('点击登录');
+            var username = $('#id-input-username');
+            var password = $('#id-input-password');
+            var data = {
+                username: username,
+                password: password
+            };
+            var parsed_data = JSON.stringify(data);
+            var request = {
+                url: '/api/login',
+                type: 'post',
+                success: function (r) {
+                    if (r.success) {
+                        location.href = r.next
+                    }else {
+                        alert(r.message)
+                    }
+                }
+            };
+            $.ajax(request);
+        };
 
+        var logIn = function () {
+            var button = $('#id-button-login');
+            button.on('click', postAuth)
+        };
 
-    <!-- jQuery -->
-    <script src="../static/js/jquery-3.0.0.min.js"></script>
+        var __main = function () {
+            logIn()
+        };
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../static/js/bootstrap.min.js"></script>
+        $('document').ready(function () {
+            __main()
+        })
+    </script>
 
 
 {% endblock %}

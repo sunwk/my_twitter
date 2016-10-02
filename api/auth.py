@@ -14,7 +14,7 @@ def login():
             log('用户登录成功', user,user.username, user.password)
             session.permanent = True
             session['user_id'] = user.id
-            r['next'] = request.args.get(url_for('.show_view'))
+            r['next'] = request.args.get(url_for('routes.show_view'))
         else:
             r['success'] = False
             r['message'] = '账号名或密码错误，需重新登录'
