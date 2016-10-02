@@ -25,7 +25,7 @@ def register_routes(app):
     app.register_blueprint(routes_todo, url_prefix='/todo')
     app.register_blueprint(routes_node, url_prefix='/node')
     app.register_blueprint(routes_topic, url_prefix='/topic')
-    app.register_blueprint(routes_showpage, url_prefix='/showpage')
+    app.register_blueprint(routes_showpage)
 
 
 def configure_app():
