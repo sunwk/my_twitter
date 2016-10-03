@@ -15,7 +15,7 @@ def login():
                 log('用户登录成功', user,user.username, user.password)
                 session.permanent = True
                 session['user_id'] = user.id
-                r['next'] = request.args.get(url_for('showpage.show_view'))
+                r['next'] = url_for('timeline.tweet_view', user_id = user.id)
             else:
                 r['success'] = False
                 r['message'] = '账号名或密码错误，需重新登录'
@@ -44,7 +44,7 @@ def register():
         if u.valid():
             log('注册成功，已跳转到内容页面')
             u.save()
-            r['next'] = request.args.get(url_for('showpage.show_view'))
+            r['next'] = url_for('showpage.show_view')
             session.permanent = True
             session['user_id'] = u.id
         else:

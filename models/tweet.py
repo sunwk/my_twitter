@@ -1,5 +1,6 @@
 from . import ModelMixin
 from . import db
+from . import timestamp
 
 
 class Tweet(db.Model, ModelMixin):
@@ -13,3 +14,4 @@ class Tweet(db.Model, ModelMixin):
     def __init__(self, form):
         super(Tweet, self).__init__()
         self.content = form.get('content', '')
+        self.created_time = timestamp()

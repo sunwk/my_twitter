@@ -14,7 +14,7 @@ def tweet_view(user_id):
         if u is not None:
             if user.is_admin():
                 tweets = Tweet.query.all()
-                return render_template('tweet.html', user=user, tweets=tweets)
+                return render_template('mytimeline.html', user=user, tweets=tweets)
             else:
                 tweets = user.tweets
                 tweets.sort(key=lambda t: t.created_time, reverse=True)
@@ -25,8 +25,8 @@ def tweet_view(user_id):
                         user_self = user
                     else:
                         user_others.append(user)
-                return render_template('tweet.html', user=user_self, users=user_others, tweets=tweets)
+                return render_template('mytimeline.html', user=user_self, users=user_others, tweets=tweets)
         else:
-            return redirect(url_for('login_view'))
+            return redirect(url_for('showpage.show_view'))
     else:
-        abort(404)
+        return redirect(url_for('showpage.show_view'))

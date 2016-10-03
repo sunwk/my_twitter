@@ -9,6 +9,7 @@ from flask import url_for
 from flask import abort
 
 from models.user import User
+from models.tweet import Tweet
 
 import time
 
