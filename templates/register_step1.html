@@ -1,0 +1,32 @@
+{% extends'base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="../static/css/twitter.css">
+    <link rel="stylesheet" href="../static/css/xiunoui.css">
+{% endblock %}
+{% block body %}
+    {{ super() }}
+
+    <div class="container">
+    <div class="page-canvas">
+    <div class="signin">
+            <h1>注册用户</h1>
+            <form method="POST" id="create_form" action="user-create.htm">
+            <input type="hidden" name="referer" value="./">
+                <fieldset>
+                    <div class="field">
+                        <input class="form-control" type="text" placeholder="邮箱" name="email" maxlength="36">
+                    </div>
+                                    </fieldset>
+                <div class="button">
+                    <button class="Button Button--primary" type="submit" loading-text="正在提交...">下一步</button>
+                    <a class="forgot" href="user-login.htm">登录</a>
+                </div>
+            </form>
+        </div>
+        <div class="info">
+            <p>
+                欢迎使用我的网站
+            </p>
+        </div>
+{% endblock %}
