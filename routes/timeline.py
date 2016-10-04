@@ -34,4 +34,4 @@ def tweet_view(user_id):
 
 @main.route('/test')
 def test_view():
-    return render_template('personal_info_edit.html')
+    return render_template('login.html')

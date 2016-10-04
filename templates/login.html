@@ -1,0 +1,33 @@
+{% extends'base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="../static/css/twitter.css">
+    <link rel="stylesheet" href="../static/css/xiunoui.css">
+{% endblock %}
+{% block body %}
+    {{ super() }}
+
+    <div class="container">
+    <div class="page-canvas">
+        <div class="signin">
+            <h1>用户登录</h1>
+            <form method="POST" id="login_form" action="user-login.htm">
+                <fieldset>
+                    <div class="field">
+                        <input class="form-control" type="text" name="account" placeholder="邮件地址或昵称">
+                    </div>
+                    <div class="field">
+                        <input class="form-control" type="password" name="password" placeholder="密码">
+                    </div>
+                </fieldset>
+                <button type="submit" class="Button Button--primary" loading-text="正在登录...">
+                    登录
+                </button>
+                            </form>
+        </div>
+        <div class="info">
+            <p>
+                欢迎使用我的网站
+            </p>
+        </div>
+{% endblock %}
