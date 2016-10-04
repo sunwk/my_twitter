@@ -1,6 +1,6 @@
 {% extends'base.html' %}
 {% block head %}
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="../static/css/twitter.css">
     <link rel="stylesheet" href="../static/css/xiunoui.css">
 {% endblock %}
@@ -13,7 +13,7 @@
                 <!-- <div class="tw-header-inner"> -->
                   <div class="reply-form fixed" id="post_create_dl" >
                       <div class="reply-inner clearfix">
-                          <form id="quick_post_form" action="post-create-105-quick.htm" method="post">
+                          <form id="quick_post_form" action="#" method="post">
                               <textarea class="input-body" name="message"></textarea>
                               <!-- <div class="post-button-left">
                                   <a href="post-create-105.htm" target="_blank">编辑器</a>
@@ -34,7 +34,7 @@
 
                 <li class="reply-item" pid="976">
                     <div class="reply-content">
-                        <a href="user-0-976.htm" class="item-user">
+                        <a href="#" class="item-user">
                             <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客" width="48px"
                                  height="48px">
                             <strong class="item-nickname">游客</strong>
@@ -75,7 +75,7 @@
                 <div class="profile-bottom">
                     <div class="user-intro">
                         <div class="signin-wrapper">
-                            <form class="signin" method="POST" id="login_form" action="user-login.htm">
+                            <form class="signin" method="POST" id="login_form" action="#">
                                 <fieldset>
                                     <div class="field">
                                         <input class="form-control" type="text" maxlength="26" name="account"
