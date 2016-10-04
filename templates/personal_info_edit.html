@@ -1,0 +1,153 @@
+{% extends'base_after.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="../static/css/twitter.css">
+    <link rel="stylesheet" href="../static/css/xiunoui.css">
+{% endblock %}
+{% block body %}
+    {{ super() }}
+
+    <div class="container">
+    <form action="#" method="post" id="my_profile_form">
+    <div class="content">
+        <div class="content-header">
+            <div class="tw-header-inner">
+                <h2>个人资料</h2>
+            </div>
+        </div>
+        <div class="content-body">
+            <div class="reply-form">
+                <div class="reply-inner">
+                    <div class="topic-content clearfix">
+                        <div class="topic-user left" style="width: 300px;">
+                            <img src="{{ url_for('static', filename='img/01.png') }}" class="avatar" id="avatar_img" alt="aaa@qq.com" title="aaa@qq.com">
+                            <strong>aaa@qq.com</strong>
+                            <small>我就是我，不一样的烟火~</small>
+                        </div>
+                        <div class="right">
+                            <input type="file" id="avatar_upload" accept=".jpg,.jpeg,.png,.gif,.bmp" class="upload" style="width:70px; opacity:0.7" value="更换头像"/>
+                            <div style="width:100%; height:6px; border:1px border #64ACA0; margin:2px 0;" id="avatar_progress">
+                                <div style="width: 0px;  height: 6px; background: #64ACA0;">
+                                </div>
+                            </div>
+                            <button class="Button Button--primary" type="submit" loading-text="正在提交...">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-inner">
+                <dl class="user-profile">
+                    <dt>用户名</dt>
+                    <dd><input class="form-control" type="text" name="username" value="aaa@qq.com"></dd>
+                    <dt>邮箱</dt>
+                    <dd style="margin-top: 5px;"><input class="form-control" type="text" name="email" value="aaa@qq.com"></dd>
+                    <dt>用户组</dt>
+                    <dd>一级用户组</dd>
+                    <dt>注册时间</dt>
+                    <dd>2016-09-13</dd>
+                    <dt>注册IP</dt>
+                    <dd>113.201.31.44</dd>
+                    <dt>最后登录</dt>
+                    <dd>2016-10-04</dd>
+                    <dt>主题</dt>
+                    <dd>1</dd>
+                    <dt>帖子</dt>
+                    <dd>0</dd>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                    <dt>被喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    </form>
+        <div class="dashboard">
+{#            登录框#}
+{#            <div class="mini-profile">#}
+{#                <div class="profile-summary">#}
+{#                    <div class="profile-content">#}
+{#                        <img src="{{ url_for('static', filename='img/01.png') }}">#}
+{#                        <b>游客</b>#}
+{#                        <small>登录后才能发帖哦~</small>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="profile-bottom">#}
+{#                    <div class="user-intro">#}
+{#                        <div class="signin-wrapper">#}
+{#                            <form class="signin" method="POST" id="login_form" action="#">#}
+{#                                <fieldset>#}
+{#                                    <div class="field">#}
+{#                                        <input class="form-control" type="text" maxlength="26" name="account"#}
+{#                                               placeholder="邮件地址或昵称">#}
+{#                                    </div>#}
+{#                                    <div class="field">#}
+{#                                        <input class="form-control" type="password" maxlength="16" name="password"#}
+{#                                               placeholder="密码">#}
+{#                                    </div>#}
+{#                                </fieldset>#}
+{#                                <div class="clearfix">#}
+{#                                    <button type="submit" class="Button Button--primary">#}
+{#                                        登录#}
+{#                                    </button>#}
+{#                                </div>#}
+{#                            </form>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            登陆后#}
+            <div class="mini-profile">
+                <div class="profile-summary">
+                    <a href="#">
+                        <div class="profile-content">
+                            <img src="{{ url_for('static', filename='img/01.png') }}">
+                            <b>aaa@qq.com</b>
+                            <small>第 <em>269</em> 位会员</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="profile-bottom">
+                    <div class="user-intro">
+                        签名处，预留~
+                    </div>
+                    <div class="profile-bottom">
+                        <a href="#" class="notify-count">
+                            <i class="fa fa-edit"></i>设置
+                        </a>
+                        <a href="#" class="balance-count">
+                            <i class="fa fa-power-off"></i>退出
+                        </a>
+                    </div>
+                </div>
+            </div>
+{#            友情链接#}
+            <div class="text-list">
+            <div class="text-inner">
+                <div class="text-module-header">
+                    <h3>我觉得有趣的网站</h3>
+                </div>
+                <ul class="text-items text-items2">
+                    <li><a href="https://g.chenjx.cn/" target="_blank">Google镜像</a></li>
+                    <li><a href="https://knewone.com/" target="_blank">KnewOne购物</a></li>
+                    <li><a href="http://nipponcolors.com/" target="_blank">有你想要的所有颜色</a></li>
+                    <li><a href="http://weavesilk.com/" target="_blank">人人都是酷炫画家</a></li>
+                    <li><a href="http://www.alexandraposen.com/" target="_blank">好看的水彩画</a></li>
+                    <li><a href="http://www.csszengarden.com/" target="_blank">CSS禅意花园</a></li>
+                </ul>
+                </div>
+            </div>
+
+            <div class="site-footer">
+                <div class="footer-inner">
+                    <div class="footer-copyright">
+                        © 2016 <a href="http://www.github.com/sunwk" target="_blank">Avalon</a>
+                        <span class="point">♥</span> Powered by
+                        <a href="http://www.github.com/sunwk" target="_blank">No One</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endblock %}
