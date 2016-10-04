@@ -30,3 +30,8 @@ def tweet_view(user_id):
             return redirect(url_for('showpage.show_view'))
     else:
         return redirect(url_for('showpage.show_view'))
+
+
+@main.route('/test')
+def test_view():
+    return render_template('tweet_detail.html')
