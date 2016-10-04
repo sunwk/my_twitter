@@ -84,12 +84,20 @@
                       <a href="#">被关注 <i class="newthreads" fid="3">0</i></a>
                     </li>
                 </ul>
-                <div class="right-nav" id="user">
-                    <div class="signin">
-                        <a href="#">登录</a>&nbsp;&nbsp;
-                        <a href="#">注册</a>
-                    </div>
-                </div>
+
+
+               <div class="right-nav" id="user">
+                   <div class="settings dropdown">
+                        <a href="#" id="settings">
+                            <img src="{{ url_for('static', filename='img/01.png') }}" class="nav-settings" width="32px" height="32">
+                        </a>
+                   </div>
+                   <div class="write">
+                        <a class="write-btn" title="发帖" href="#">
+                            <small>发帖</small>
+                        </a>
+                   </div>
+               </div>
             </div>
         </div>
     {% endblock %}

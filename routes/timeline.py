@@ -34,4 +34,4 @@ def tweet_view(user_id):
 
 @main.route('/test')
 def test_view():
-    return render_template('other_timeline.html')
+    return render_template('self_timeline_aftersign.html')

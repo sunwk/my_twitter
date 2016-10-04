@@ -1,4 +1,4 @@
-{% extends'base.html' %}
+{% extends'base_after.html' %}
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="../static/css/twitter.css">
@@ -162,7 +162,7 @@
 {#            登陆后#}
             <div class="mini-profile">
                 <div class="profile-summary">
-                    <a href="my.htm">
+                    <a href="#">
                         <div class="profile-content">
                             <img src="static/avatar.png">
                             <b>aaa@qq.com</b>
@@ -175,10 +175,10 @@
                         签名处，预留~
                     </div>
                     <div class="profile-bottom">
-                        <a href="my.htm" class="notify-count">
-                            <i class="fa fa-tachometer"></i>设置
+                        <a href="#" class="notify-count">
+                            <i class="fa fa-edit"></i>设置
                         </a>
-                                    <a href="user-logout.htm" class="balance-count">
+                        <a href="#" class="balance-count">
                             <i class="fa fa-power-off"></i>退出
                         </a>
                     </div>
@@ -206,7 +206,7 @@
                     <div class="footer-copyright">
                         © 2016 <a href="http://www.github.com/sunwk" target="_blank">Avalon</a>
                         <span class="point">♥</span> Powered by
-                        <a href="http://bbs.xiuno.com/" target="_blank">No One</a>
+                        <a href="http://www.github.com/sunwk" target="_blank">No One</a>
                     </div>
                 </div>
             </div>
