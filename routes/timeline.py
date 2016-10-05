@@ -1,6 +1,5 @@
 from routes import *
 
-
 main = Blueprint('timeline', __name__)
 
 
@@ -10,6 +9,20 @@ def timeline_view():
     tweets.sort(key=lambda t: t.created_time, reverse=True)
     return render_template('all_timeline_beforesign.html', tweets=tweets)
 
+
+@main.route('/<user_id>')
+def self_timeline_view(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    u = current_user()
+    log('debug current_user is:', u)
+    if user is not None:
+        if u is not None:
+            user.visitors_add()
+            tweets = user.tweets
+            tweets.sort(key=lambda t: t.created_time, reverse=True)
+            return render_template('self_timeline_aftersign.html', tweets=tweets, user=user)
+    else:
+        return redirect(url_for('timeline.timeline_view'))
 
 # @main.route('/<user_id>')
 # def tweet_view(user_id):
@@ -41,4 +54,4 @@ def timeline_view():
 
 @main.route('/test')
 def test_view():
-    return render_template('register_step2.html')
+    return render_template('self_timeline_aftersign.html')

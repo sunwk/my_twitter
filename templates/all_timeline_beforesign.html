@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="../static/css/twitter.css">
     <link rel="stylesheet" href="../static/css/xiunoui.css">
+    <script src="../static/js/jquery-3.0.0.min.js"></script>
 {% endblock %}
 {% block body %}
     {{ super() }}
@@ -62,7 +63,7 @@
                     <div class="profile-content">
                         <img src="{{ url_for('static', filename='img/01.png') }}">
                         <b>游客</b>
-                        <small>登录后才能发帖哦~</small>
+                        <small>登录后才能查看评论哟~~</small>
                     </div>
                 </div>
                 <div class="profile-bottom">
@@ -71,16 +72,16 @@
                             <form class="signin" method="POST" id="login_form" action="#">
                                 <fieldset>
                                     <div class="field">
-                                        <input class="form-control" type="text" maxlength="26" name="account"
-                                               placeholder="邮件地址或昵称">
+                                        <input id="id-login-username" class="form-control" type="text" maxlength="26"
+                                               name="account" placeholder="用户名">
                                     </div>
                                     <div class="field">
-                                        <input class="form-control" type="password" maxlength="16" name="password"
-                                               placeholder="密码">
+                                        <input id="id-login-password" class="form-control" type="password" maxlength="16"
+                                               name="password" placeholder="密码">
                                     </div>
                                 </fieldset>
                                 <div class="clearfix">
-                                    <button type="submit" class="Button Button--primary">
+                                    <button id="id-button-login" type="button" class="Button Button--primary">
                                         登录
                                     </button>
                                 </div>
@@ -143,4 +144,71 @@
         </div>
         <div class="clear"></div>
     </div>
+
+    <script>
+        var post = function (url, data) {
+            var request = {
+                url: url,
+                type: 'post',
+                data: data,
+                contentType: 'application/json',
+                success: function (r) {
+                    if (r.success) {
+                        location.href = r.next
+                    }else {
+                        alert(r.message)
+                    }
+                }
+            };
+            $.ajax(request);
+        };
+
+        var log_info = function () {
+            console.log('点击登录');
+            var username = $('#id-login-username').val();
+            var password = $('#id-login-password').val();
+            var data = {
+                username: username,
+                password: password
+            };
+            var parsed_data = JSON.stringify(data);
+            var url = '/api/login';
+            post(url, parsed_data)
+        };
+
+        var reg_info = function () {
+            console.log('点击注册');
+            var username = $('#id-register-username').val();
+            var password = $('#id-register-password').val();
+            var data = {
+                username: username,
+                password: password
+            };
+            console.log('注册账户密码', data);
+            var parsed_data = JSON.stringify(data);
+            var url = '/api/register';
+            post(url, parsed_data)
+        };
+
+        var logIn = function () {
+            var button = $('#id-button-login');
+            button.on('click', log_info)
+        };
+
+        var register = function () {
+            var button = $('#id-button-register');
+            button.on('click', reg_info)
+        };
+
+        var __main = function () {
+            logIn();
+            register()
+        };
+
+        $('document').ready(function () {
+            __main()
+        })
+    </script>
+
+
 {% endblock %}

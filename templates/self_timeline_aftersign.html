@@ -31,27 +31,27 @@
 
 
             <ol class="reply-items" id="postlist">
-
+            {% for tweet in tweets %}
                 <li class="stream-item">
                     <div class="stream-content" href="thread-142.htm">
                         <a href="#" class="item-user">
                             <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
                                  width="48px"
                                  height="48px">
-                            <strong class="item-nickname">游客</strong>
+                            <strong class="item-nickname">{{ user.username }}</strong>
                         </a>
                         <small class="time" title="发帖时间">
-                            8小时前
+                            {{ tweet.created_time }}
                         </small>
                         <p class="item-message">
-                            站长在吗，请教一个问题！
+                            {{ tweet.content }}
                         </p>
                         <div class="post-actions">
                             <a href="#" title="1 回复">
                                 <span class="web-icon icon-comment">
                                     <i class="fa fa-comment" title="回复"></i>
                                 </span>
-                                <span class="replies">1</span>
+                                <span class="replies">{{ tweet.comments | length }}</span>
                             </a>
 {#                                <span class="like" title="0 喜欢">#}
 {#                                    <i class="fa fa-heart" title="喜欢"></i>#}
@@ -60,62 +60,7 @@
                         </div>
                     </div>
                 </li>
-
-                                <li class="stream-item">
-                    <div class="stream-content" href="thread-142.htm">
-                        <a href="#" class="item-user">
-                            <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
-                                 width="48px"
-                                 height="48px">
-                            <strong class="item-nickname">游客</strong>
-                        </a>
-                        <small class="time" title="发帖时间">
-                            8小时前
-                        </small>
-                        <p class="item-message">
-                            站长在吗，请教一个问题！
-                        </p>
-                        <div class="post-actions">
-                            <a href="#" title="1 回复">
-                                <span class="web-icon icon-comment">
-                                    <i class="fa fa-comment" title="回复"></i>
-                                </span>
-                                <span class="replies">1</span>
-                            </a>
-{#                                <span class="like" title="0 喜欢">#}
-{#                                    <i class="fa fa-heart" title="喜欢"></i>#}
-{#                                    <span class="likes">0</span>#}
-{#                                </span>#}
-                        </div>
-                    </div>
-                </li>                <li class="stream-item">
-                    <div class="stream-content" href="thread-142.htm">
-                        <a href="#" class="item-user">
-                            <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
-                                 width="48px"
-                                 height="48px">
-                            <strong class="item-nickname">游客</strong>
-                        </a>
-                        <small class="time" title="发帖时间">
-                            8小时前
-                        </small>
-                        <p class="item-message">
-                            站长在吗，请教一个问题！
-                        </p>
-                        <div class="post-actions">
-                            <a href="#" title="1 回复">
-                                <span class="web-icon icon-comment">
-                                    <i class="fa fa-comment" title="回复"></i>
-                                </span>
-                                <span class="replies">1</span>
-                            </a>
-{#                                <span class="like" title="0 喜欢">#}
-{#                                    <i class="fa fa-heart" title="喜欢"></i>#}
-{#                                    <span class="likes">0</span>#}
-{#                                </span>#}
-                        </div>
-                    </div>
-                </li>
+                {% endfor %}
             </ol>
 
             <div class="stream-footer">
@@ -165,8 +110,8 @@
                     <a href="#">
                         <div class="profile-content">
                             <img src="{{ url_for('static', filename='img/01.png') }}">
-                            <b>aaa@qq.com</b>
-                            <small>第 <em>269</em> 位会员</small>
+                            <b>{{ user.username }}</b>
+                            <small>本网站第 <em>{{ user.id }}</em> 位超级酷炫至尊VIP</small>
                         </div>
                     </a>
                 </div>
