@@ -5,9 +5,13 @@ main = Blueprint('timeline', __name__)
 
 @main.route('/')
 def timeline_view():
+    u = current_user()
     tweets = Tweet.query.all()
     tweets.sort(key=lambda t: t.created_time, reverse=True)
-    return render_template('all_timeline_beforesign.html', tweets=tweets)
+    if u is None:
+        return render_template('all_timeline_beforesign.html', tweets=tweets)
+    else:
+        return render_template('all_timeline_aftersign.html', tweets=tweets)
 
 
 @main.route('/<int:user_id>')
