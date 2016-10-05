@@ -12,7 +12,7 @@ def login():
         user = User.query.filter_by(username=u.username).first()
         if user is not None:
             if user.validate(u):
-                log('用户登录成功', user,user.username, user.password)
+                log('用户登录成功', user, user.username, user.password)
                 session.permanent = True
                 session['user_id'] = user.id
                 r['next'] = url_for('timeline.tweet_view', user_id = user.id)

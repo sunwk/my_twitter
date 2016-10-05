@@ -8,7 +8,7 @@ main = Blueprint('timeline', __name__)
 def tweet_view(user_id):
     user = User.query.filter_by(id=user_id).first()
     u = current_user()
-    log('debug current_user is:',u)
+    log('debug current_user is:', u)
     if user is not None:
         user.visitors_add()
         if u is not None:
