@@ -11,6 +11,7 @@ from models.user import User
 from models.node import Node
 from models.topic import Topic
 from models.tweet import Tweet
+from models.comment import Comment
 
 from routes.todo import main as routes_todo
 from routes.node import main as routes_node
@@ -72,6 +73,6 @@ def configure_manager():
 if __name__ == '__main__':
     configure_manager()
     configure_app()
-    # manager.run()
-    app.run(debug=True)
+    manager.run()
+    # app.run(debug=True)
 # gunicorn -b '0.0.0.0:80' redischat:app

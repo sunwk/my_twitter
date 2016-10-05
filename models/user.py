@@ -21,6 +21,7 @@ class User(db.Model, ModelMixin):
     sex = db.Column(db.String())
 
     tweets = db.relationship('Tweet', backref='user')
+    comments = db.relationship('Comment', backref='user')
 
     def __init__(self, form):
         super(User, self).__init__()

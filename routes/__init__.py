@@ -11,6 +11,8 @@ from flask import abort
 from models.user import User
 from models.tweet import Tweet
 
+from app import app
+
 import time
 
 
@@ -29,3 +31,9 @@ def current_user():
     user_id = session.get('user_id', '')
     user = User.query.filter_by(id=user_id).first()
     return user
+
+
+@app.template_filter('length')
+def get_length(f):
+    return len(f)
+
