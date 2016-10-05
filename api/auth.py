@@ -15,7 +15,7 @@ def login():
                 log('用户登录成功', user, user.username, user.password)
                 session.permanent = True
                 session['user_id'] = user.id
-                r['next'] = url_for('timeline.tweet_view', user_id = user.id)
+                r['next'] = url_for('timeline.timeline_view', user_id = user.id)
             else:
                 r['success'] = False
                 r['message'] = '账号名或密码错误，需重新登录'

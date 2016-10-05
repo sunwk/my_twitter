@@ -32,3 +32,11 @@ def register():
     else:
         log('用户名或密码不合规范，需重新输入')
         return redirect(url_for('register_view'))
+
+
+@main.route('/logout', methods=['GET'])
+def logout():
+    u = current_user()
+    if u is not None:
+        session.pop('user_id')
+    return redirect(url_for('timeline.timeline_view'))
