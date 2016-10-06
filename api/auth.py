@@ -41,16 +41,22 @@ def register():
     log('测试注册form', form)
     if form is not None:
         u = User(form)
-        if u.valid():
-            log('注册成功，已跳转到内容页面')
-            u.save()
-            r['next'] = url_for('showpage.show_view')
-            session.permanent = True
-            session['user_id'] = u.id
+        is_unique_user = len(User.query.filter_by(username=u.username).all()) == 0
+        if is_unique_user:
+            if u.valid():
+                log('注册成功，已跳转到内容页面')
+                u.save()
+                r['next'] = url_for('timeline.timeline_view')
+                session.permanent = True
+                session['user_id'] = u.id
+            else:
+                log('用户名或密码不合规范，需重新输入')
+                r['success'] = False
+                r['message'] = '用户名或密码不合规范，需重新输入'
         else:
-            log('用户名或密码不合规范，需重新输入')
+            log('用户名已存在')
             r['success'] = False
-            r['message'] = '用户名或密码不合规范，需重新输入'
+            r['message'] = '用户名已存在'
     else:
         log('用户名或密码不合规范，需重新输入')
         r['success'] = False

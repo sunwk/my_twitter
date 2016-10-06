@@ -77,6 +77,6 @@ def configure_manager():
 if __name__ == '__main__':
     configure_manager()
     configure_app()
-    manager.run()
-    # app.run(debug=True)
+    # manager.run()
+    app.run(debug=True)
 # gunicorn -b '0.0.0.0:80' redischat:app
