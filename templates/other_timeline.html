@@ -103,7 +103,11 @@
                 </div>
                 <div class="profile-bottom">
                     <div class="user-intro">
-                        {{ user.signature }}
+                        {% if user.signature %}
+                            {{ user.signature }}
+                        {% else %}
+                            这个人很懒，连个性签名都不设置，快鄙视他~~
+                        {% endif %}
                     </div>
                     <div class="profile-bottom">
                         <a href="#" class="center-block center">

@@ -17,34 +17,34 @@
 
             <ol class="reply-items" id="postlist">
             {% for tweet in tweets %}
-                <li class="stream-item">
-                    <div class="stream-content" href="thread-142.htm">
-                        <a href="#" class="item-user">
-                            <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
-                                 width="48px"
-                                 height="48px">
-                            <strong class="item-nickname">{{ tweet.user.username }}</strong>
-                        </a>
-                        <small class="time" title="发帖时间">
-                            {{ tweet.created_time }}
-                        </small>
-                        <p class="item-message">
-                            {{ tweet.content }}
-                        </p>
-                        <div class="post-actions">
-                            <a href="#" title="1 回复">
-                                <span class="web-icon icon-comment">
-                                    <i class="fa fa-comment" title="回复"></i>
-                                </span>
-                                <span class="replies">{{ tweet.comments | length}}</span>
+                    <li class="stream-item">
+                        <div class="stream-content" href="{{ url_for('tweet.tweet_view', tweet_id=tweet.id) }}">
+                            <a href="{{ url_for('timeline.self_timeline_view', user_id=tweet.user.id) }}" class="item-user">
+                                <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
+                                     width="48px"
+                                     height="48px">
+                                <strong class="item-nickname">{{ tweet.user.username }}</strong>
                             </a>
-{#                                <span class="like" title="0 喜欢">#}
-{#                                    <i class="fa fa-heart" title="喜欢"></i>#}
-{#                                    <span class="likes">0</span>#}
-{#                                </span>#}
+                            <small class="time" title="发帖时间">
+                                {{ tweet.created_time }}
+                            </small>
+                            <p class="item-message">
+                                {{ tweet.content }}
+                            </p>
+                            <div class="post-actions">
+                                <a href="#" title="1 回复">
+                                    <span class="web-icon icon-comment">
+                                        <i class="fa fa-comment" title="回复"></i>
+                                    </span>
+                                    <span class="replies">{{ tweet.comments | length}}</span>
+                                </a>
+    {#                                <span class="like" title="0 喜欢">#}
+    {#                                    <i class="fa fa-heart" title="喜欢"></i>#}
+    {#                                    <span class="likes">0</span>#}
+    {#                                </span>#}
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
             {% endfor %}
             </ol>
 
@@ -92,7 +92,7 @@
 {#            登陆后#}
             <div class="mini-profile">
                 <div class="profile-summary">
-                    <a href="#">
+                    <a href="{{ url_for('timeline.self_timeline_view', user_id=user.id) }}">
                         <div class="profile-content">
                             <img src="{{ url_for('static', filename='img/01.png') }}">
                             <b>{{ user.username }}</b>
@@ -109,7 +109,7 @@
                         {% endif %}
                     </div>
                     <div class="profile-bottom">
-                        <a href="#" class="notify-count">
+                        <a href="{{ url_for('edit.edit_view', user_id=user.id) }}" class="notify-count">
                             <i class="fa fa-edit"></i>设置
                         </a>
                         <a href="{{ url_for('auth.logout') }}" class="balance-count">

@@ -155,7 +155,7 @@
                         {% endif %}
                     </div>
                     <div class="profile-bottom">
-                        <a href="#" class="notify-count">
+                        <a href="{{ url_for('edit.edit_view', user_id=user.id) }}" class="notify-count">
                             <i class="fa fa-edit"></i>设置
                         </a>
                         <a href="{{ url_for('auth.logout') }}" class="balance-count">

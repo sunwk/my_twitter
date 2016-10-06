@@ -75,7 +75,7 @@
                         <!-- </a> -->
                     </li>
                     <li class="ml15">
-                        <a class="logo" title="首页" href="./"> 首页 <i class="newthreads">0</i></a>
+                        <a class="logo" title="首页" href="{{ url_for('timeline.timeline_view') }}"> 首页 <i class="newthreads">0</i></a>
                     </li>
                     <li>
                         {% if user %}
