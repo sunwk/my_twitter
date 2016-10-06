@@ -21,8 +21,8 @@
                     <div class="topic-content clearfix">
                         <div class="topic-user left" style="width: 300px;">
                             <img src="{{ url_for('static', filename='img/01.png') }}" class="avatar" id="avatar_img" alt="aaa@qq.com" title="aaa@qq.com">
-                            <strong>aaa@qq.com</strong>
-                            <small>我就是我，不一样的烟火~</small>
+                            <strong>{{ user.username }}</strong>
+                            <small>{{ user.signature }}</small>
                         </div>
                         <div class="right">
                             <input type="file" id="avatar_upload" accept=".jpg,.jpeg,.png,.gif,.bmp" class="upload" style="width:70px; opacity:0.7" value="更换头像"/>
@@ -38,21 +38,21 @@
             <div class="content-inner">
                 <dl class="user-profile">
                     <dt>用户名</dt>
-                    <dd><input class="form-control" type="text" name="username" value="aaa@qq.com"></dd>
+                    <dd><input class="form-control" type="text" name="username" value="{{ user.username }}"></dd>
                     <dt>邮箱</dt>
-                    <dd style="margin-top: 5px;"><input class="form-control" type="text" name="email" value="aaa@qq.com"></dd>
+                    <dd style="margin-top: 5px;"><input class="form-control" type="text" name="email" value="{{ user.username }}"></dd>
                     <dt>用户组</dt>
                     <dd>一级用户组</dd>
                     <dt>注册时间</dt>
-                    <dd>2016-09-13</dd>
-                    <dt>注册IP</dt>
-                    <dd>113.201.31.44</dd>
-                    <dt>最后登录</dt>
-                    <dd>2016-10-04</dd>
-                    <dt>主题</dt>
-                    <dd>1</dd>
+                    <dd>{{ user.created_time }}</dd>
+{#                    <dt>注册IP</dt>#}
+{#                    <dd>113.201.31.44</dd>#}
+{#                    <dt>最后登录</dt>#}
+{#                    <dd>2016-10-04</dd>#}
+{#                    <dt>主题</dt>#}
+{#                    <dd>1</dd>#}
                     <dt>帖子</dt>
-                    <dd>0</dd>
+                    <dd>{{ user.tweets | length }}</dd>
                     <dt>喜欢</dt>
                     <dd>0</dd>
                     <dt>被喜欢</dt>
@@ -102,20 +102,20 @@
                     <a href="#">
                         <div class="profile-content">
                             <img src="{{ url_for('static', filename='img/01.png') }}">
-                            <b>aaa@qq.com</b>
-                            <small>第 <em>269</em> 位会员</small>
+                            <b>{{ user.username }}</b>
+                            <small>本网站第 <em>{{ user.id }}</em> 位超级酷炫至尊VIP</small>
                         </div>
                     </a>
                 </div>
                 <div class="profile-bottom">
                     <div class="user-intro">
-                        签名处，预留~
+                        {{ user.signature }}
                     </div>
                     <div class="profile-bottom">
                         <a href="#" class="notify-count">
                             <i class="fa fa-edit"></i>设置
                         </a>
-                        <a href="#" class="balance-count">
+                        <a href="{{ url_for('auth.logout') }}" class="balance-count">
                             <i class="fa fa-power-off"></i>退出
                         </a>
                     </div>

@@ -95,14 +95,14 @@
                     <a href="#">
                         <div class="profile-content">
                             <img src="{{ url_for('static', filename='img/01.png') }}">
-                            <b>aaa@qq.com</b>
-                            <small>第 <em>269</em> 位会员</small>
+                            <b>{{ user.username }}</b>
+                            <small>本网站第 <em>{{ user.id }}</em> 位超级酷炫至尊VIP</small>
                         </div>
                     </a>
                 </div>
                 <div class="profile-bottom">
                     <div class="user-intro">
-                        签名处，预留~
+                        {{ user.signature }}
                     </div>
                     <div class="profile-bottom">
                         <a href="#" class="notify-count">
