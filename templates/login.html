@@ -11,10 +11,10 @@
     <div class="page-canvas">
         <div class="signin">
             <h1>用户登录</h1>
-            <form method="POST" id="login_form" action="user-login.htm">
+            <form method="POST" id="login_form" action="{{ url_for('auth.login') }}">
                 <fieldset>
                     <div class="field">
-                        <input class="form-control" type="text" name="account" placeholder="邮件地址或昵称">
+                        <input class="form-control" type="text" name="username" placeholder="用户名">
                     </div>
                     <div class="field">
                         <input class="form-control" type="password" name="password" placeholder="密码">
@@ -23,7 +23,7 @@
                 <button type="submit" class="Button Button--primary" loading-text="正在登录...">
                     登录
                 </button>
-                            </form>
+            </form>
         </div>
         <div class="info">
             <p>

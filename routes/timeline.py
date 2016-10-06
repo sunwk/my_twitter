@@ -11,7 +11,7 @@ def timeline_view():
     if u is None:
         return render_template('all_timeline_beforesign.html', tweets=tweets)
     else:
-        return render_template('all_timeline_aftersign.html', tweets=tweets)
+        return render_template('all_timeline_aftersign.html', tweets=tweets, user=u)
 
 
 @main.route('/<int:user_id>')
@@ -24,7 +24,7 @@ def self_timeline_view(user_id):
             user.visitors_add()
             tweets = user.tweets
             tweets.sort(key=lambda t: t.created_time, reverse=True)
-            log('debug user id  u id', user_id, u.id, type(u.id), type(user_id), u.id == user_id)
+            log('debug user id  u id', user_id, u.id, type(u.id), type(user_id), u.id == user_id, session.items())
             if u.id == user_id:
                 log('走这里')
                 return render_template('self_timeline_aftersign.html', tweets=tweets, user=user)
@@ -63,4 +63,4 @@ def self_timeline_view(user_id):
 
 @main.route('/test')
 def test_view():
-    return render_template('self_timeline_aftersign.html')
+    return render_template('login.html')
