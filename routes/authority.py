@@ -7,19 +7,12 @@ main = Blueprint('auth', __name__)
 @main.route('/login', methods=['POST'])
 def login():
     u = User(request.form)
-    user = User.query.filter_by(id=u.id).first()
-    if user is not None:
-        if user.validate(u):
-            log('用户登录成功', user,user.username, user.password)
-            session['user_id'] = user.id
-            r = redirect(url_for('tweet_view', user_id=user.id))
-            return r
-        else:
-            log('账号名或密码错误，需重新登录', user)
-            return redirect(url_for('login_view'))
-    else:
-        log('用户尚未注册，须先注册再登录', user)
-        return redirect(url_for('register_view'))
+    user = User.query.filter_by(username=u.username).first()
+    if user is not None and user.validate(u):
+        log('用户登录成功', user, user.username, user.password)
+        session.permanent = True
+        session['user_id'] = user.id
+    return redirect(url_for('timeline.timeline_view'))
 
 
 @main.route('/login', methods=['GET'])

@@ -8,6 +8,7 @@ def timeline_view():
     u = current_user()
     tweets = Tweet.query.all()
     tweets.sort(key=lambda t: t.created_time, reverse=True)
+    # log('debug current user', u.id, u.username)
     if u is None:
         return render_template('all_timeline_beforesign.html', tweets=tweets)
     else:
