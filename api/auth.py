@@ -38,7 +38,7 @@ def register():
         'success': True
     }
     form = request.get_json()
-    log('测试注册form',form)
+    log('测试注册form', form)
     if form is not None:
         u = User(form)
         if u.valid():
