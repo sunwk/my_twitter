@@ -11,22 +11,33 @@
     <div class="page-canvas">
     <div class="signin">
             <h1>注册用户</h1>
-            <form method="POST" id="create_form" action="user-create.htm">
+            <form method="POST" id="create_form" action="{{ url_for('auth.register') }}">
             <input type="hidden" name="referer" value="./">
                 <fieldset>
                     <div class="field">
-                        <input class="form-control" type="text" placeholder="邮箱" name="email" maxlength="36">
+                        <input class="form-control" type="text" placeholder="用户名（大于三位）" name="username" maxlength="36">
                     </div>
-                                    </fieldset>
+                    <div class="field">
+                        <input class="form-control" type="text" name="password" placeholder="设置密码（大于三位）">
+                    </div>
+                </fieldset>
                 <div class="button">
-                    <button class="Button Button--primary" type="submit" loading-text="正在提交...">下一步</button>
-                    <a class="forgot" href="user-login.htm">登录</a>
+                    <button class="Button Button--primary" type="submit" loading-text="正在提交...">完成注册</button>
+                    <a class="forgot" href="#">登录</a>
                 </div>
             </form>
         </div>
         <div class="info">
             <p>
-                欢迎使用我的网站
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      {{ message }}
+                    {% endfor %}
+                  {% else %}
+                      欢迎来到我的网站
+                  {% endif %}
+                {% endwith %}
             </p>
         </div>
 {% endblock %}

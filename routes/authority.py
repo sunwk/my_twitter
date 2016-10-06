@@ -12,7 +12,11 @@ def login():
         log('用户登录成功', user, user.username, user.password)
         session.permanent = True
         session['user_id'] = user.id
-    return redirect(url_for('timeline.timeline_view'))
+        return redirect(url_for('timeline.timeline_view'))
+    else:
+        log('用户登录失败')
+        flash('账户名或密码错误，请重新登录')
+        return redirect(url_for('auth.login_view'))
 
 
 @main.route('/login', methods=['GET'])
@@ -28,12 +32,24 @@ def login_view():
 def register():
     u = User(request.form)
     if u.valid():
-        log('注册成功，已跳转到内容页面')
+        log('注册成功，已跳转到timeline页面，并直接保持登录状态')
         u.save()
-        return redirect(url_for('login_view'))
+        session.permanent = True
+        session['user_id'] = u.id
+        return redirect(url_for('timeline.timeline_view'))
     else:
         log('用户名或密码不合规范，需重新输入')
-        return redirect(url_for('register_view'))
+        flash('用户名或密码不合规范，需重新输入')
+        return redirect(url_for('auth.register_view'))
+
+
+@main.route('/register', methods=['GET'])
+def register_view():
+    u = current_user()
+    if u is not None:
+        return redirect(url_for('timeline.timeline_view'))
+    else:
+        return render_template('register_step1.html')
 
 
 @main.route('/logout', methods=['GET'])

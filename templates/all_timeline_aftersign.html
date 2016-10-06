@@ -102,7 +102,11 @@
                 </div>
                 <div class="profile-bottom">
                     <div class="user-intro">
-                        {{ user.signature }}
+                        {% if user.signature %}
+                            {{ user.signature }}
+                        {% else %}
+                              快点下边设置你的个性签名
+                        {% endif %}
                     </div>
                     <div class="profile-bottom">
                         <a href="#" class="notify-count">
