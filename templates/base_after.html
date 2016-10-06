@@ -78,7 +78,11 @@
                         <a class="logo" title="首页" href="./"> 首页 <i class="newthreads">0</i></a>
                     </li>
                     <li>
-                      <a href="#">个人主页 <i class="newthreads">0</i></a>
+                        {% if user %}
+                            <a href="{{ url_for('timeline.self_timeline_view', user_id = user.id) }}">个人主页 <i class="newthreads">0</i></a>
+                        {% else %}
+                            <a href="{{ url_for('auth.register_view') }}">个人主页 <i class="newthreads">0</i></a>
+                        {% endif %}
                     </li>
                     <li>
                       <a href="#">关注 <i class="newthreads">0</i></a>

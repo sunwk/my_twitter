@@ -10,7 +10,7 @@ def timeline_view():
     tweets.sort(key=lambda t: t.created_time, reverse=True)
     # log('debug current user', u.id, u.username)
     if u is None:
-        return render_template('all_timeline_beforesign.html', tweets=tweets)
+        return render_template('all_timeline_beforesign.html', tweets=tweets, user=u)
     else:
         return render_template('all_timeline_aftersign.html', tweets=tweets, user=u)
 
