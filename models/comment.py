@@ -16,3 +16,5 @@ class Comment(db.Model, ModelMixin):
         super(Comment, self).__init__()
         self.content = form.get('content', '')
         self.created_time = timestamp()
+        self.tweet_id = form.get('tweet_id', '')
+        self.user_id = form.get('user_id', '')

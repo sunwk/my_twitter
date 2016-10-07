@@ -45,11 +45,29 @@
                 </div>
             </div>
 
+            <div id="id-div-form" class="reply-form fixed">
+{#                <div class="reply-form fixed fixed-bottom">#}
+                <div class="reply-inner clearfix">
+                    <form id="quick_post_form">
+                        <textarea id="id-input-content" class="input-body" name="message"></textarea>
+{#                        <div class="post-button-left">#}
+{#                            <a href="post-create-55.htm" target="_blank">编辑器</a>#}
+{#                        </div>#}
+                        <div class="post-button-right">
+{#                            <a class="Button mr15 b-bjq" href="post-create-55.htm">编辑器</a>#}
+                            <button id="id-button-submit" class="Button Button--primary" type="button">
+                                <span class="submit-button-text">回复</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <ol class="reply-items" id="postlist">
             {% for comment in comments %}
-                <li class="stream-item">
-                    <div class="stream-content" href="thread-142.htm">
-                        <a href="{{ url_for('timeline.self_timeline_view', user_id=comment.user.id) }}" class="item-user">
+                <li class="reply-item">
+                    <div class="reply-content" href="thread-142.htm">
+                        <a href="{{ url_for('timeline.self_timeline_view', user_id=comment.user_id) }}" class="item-user">
                             <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
                                  width="48px"
                                  height="48px">
@@ -62,7 +80,7 @@
                             {{ comment.content }}
                         </p>
                         <div class="post-actions">
-                            <a href="#" title="1 回复">
+                            <a title="1 回复">
                                 <span class="web-icon icon-comment">
                                     <i class="fa fa-heart" title="回复"></i>
                                 </span>
@@ -76,25 +94,9 @@
                     </div>
                 </li>
             {% endfor %}
+
             </ol>
 
-            <div class="reply-form fixed" data-style="fixed-bottom" data-offset-fixed="10" id="post_create_dl"
-                 style="width: 588px;">
-                <div class="reply-inner clearfix">
-                    <form id="quick_post_form" action="post-create-55-quick.htm" method="post">
-                        <textarea class="input-body" name="message"></textarea>
-{#                        <div class="post-button-left">#}
-{#                            <a href="post-create-55.htm" target="_blank">编辑器</a>#}
-{#                        </div>#}
-                        <div class="post-button-right">
-{#                            <a class="Button mr15 b-bjq" href="post-create-55.htm">编辑器</a>#}
-                            <button class="Button Button--primary" type="submit" loading-text="正在提交...">
-                                <span class="submit-button-text">回复</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
             <div class="stream-footer">
                 <div class="stream-end-inner">
                     <button id="id-button-scroll" class="Button win-back">已加载全部回复，点击返回</button>
@@ -102,40 +104,6 @@
             </div>
         </div>
         <div class="dashboard">
-{#            登录框#}
-{#            <div class="mini-profile">#}
-{#                <div class="profile-summary">#}
-{#                    <div class="profile-content">#}
-{#                        <img src="{{ url_for('static', filename='img/01.png') }}">#}
-{#                        <b>游客</b>#}
-{#                        <small>登录后才能发帖哦~</small>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="profile-bottom">#}
-{#                    <div class="user-intro">#}
-{#                        <div class="signin-wrapper">#}
-{#                            <form class="signin" method="POST" id="login_form" action="#">#}
-{#                                <fieldset>#}
-{#                                    <div class="field">#}
-{#                                        <input class="form-control" type="text" maxlength="26" name="account"#}
-{#                                               placeholder="邮件地址或昵称">#}
-{#                                    </div>#}
-{#                                    <div class="field">#}
-{#                                        <input class="form-control" type="password" maxlength="16" name="password"#}
-{#                                               placeholder="密码">#}
-{#                                    </div>#}
-{#                                </fieldset>#}
-{#                                <div class="clearfix">#}
-{#                                    <button type="submit" class="Button Button--primary">#}
-{#                                        登录#}
-{#                                    </button>#}
-{#                                </div>#}
-{#                            </form>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            登陆后#}
             <div class="mini-profile">
                 <div class="profile-summary">
                     <a href="#">
@@ -193,7 +161,106 @@
         </div>
         <div class="clear"></div>
     </div>
+    <div id="id-div-tweet_id" data-tweet_id="{{ tweet.id }}">
+    <div id="id-div-user_url" data-user_url="{{ url_for('timeline.self_timeline_view', user_id=user.id) }}">
+    <div id="id-div-img_url" data-img_url="{{ url_for('static', filename='img/01.png') }}">
     <script>
+        var addComment = function () {
+            console.log('ready');
+            var button = $('#id-button-submit');
+            var content_input = $('#id-input-content');
+            button.on('click', function () {
+                var content = content_input.val();
+                var tweet_id = $('#id-div-tweet_id').data('tweet_id');
+                //preparsedContent = content.split('\n');
+                //var completeContent = '';
+                //for(var i=0; i<preparsedContent.length; i++){
+                //    var temp = '<p>' + preparsedContent[i] + '</p>';
+                //    completeContent = completeContent + temp
+                //}
+                //console.log('评论内容段落数量', preparsedContent.length);
+                //console.log('评论内容 :',preparsedContent);
+                //console.log('拼接完成的评论html :',completeContent);
+                var data = {
+                    content: content,
+                    tweet_id: tweet_id
+                };
+                var json_data = JSON.stringify(data);
+                console.log('debug json_data :', json_data);
+                var request = {
+                    url: "{{ url_for('api.comment_add') }}",
+                    contentType: 'application/json',
+                    type: 'post',
+                    data: json_data,
+                    success: function (r) {
+                        console.log('服务器返回了:', r);
+                        if (r.success){
+                            insertComment(r)
+                        }else {
+                            alert('请先注册登录再评论')
+                        }
+                    }
+                };
+                $.ajax(request);
+            })
+        };
+
+        var insertComment = function (comment) {
+                var t = commentTemplate(comment);
+                $('#postlist').prepend(t);
+            };
+
+        var dateTime = function (time) {
+            var t = time;
+            var date = new Date(Number(t)*1000);
+            var Y = date.getFullYear() + '-';
+            var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+            var D = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + ' ';
+            var h = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ':';
+            var m = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ':';
+            var s = date.getSeconds();
+            return Y + M + D + h + m + s;
+        };
+
+
+        var commentTemplate = function (comment) {
+            var user_url = $('#id-div-user_url').data('user_url');
+            var img_url = $('#id-div-img_url').data('img_url');
+            var content = comment.content;
+            var created_time = comment.created_time;
+            var time = dateTime(created_time);
+            var username = comment.current_username;
+            var parsed_time = comment.created_time;
+            var user_id = comment.user_id;
+            var t = `
+            <li class="reply-item">
+                <div class="reply-content" href="thread-142.htm">
+                    <a href="${user_url}" class="item-user">
+                        <img class="item-avatar" src="${img_url}" alt="游客"
+                             width="48px"
+                             height="48px">
+                        <strong class="item-nickname">${username} </strong>
+                    </a>
+                    <small class="time" title="发帖时间">
+                        发表于 <time>${time}</time>
+                    </small>
+                    <p class="item-message">
+                        ${content}
+                    </p>
+                    <div class="post-actions">
+                        <a title="1 回复">
+                            <span class="web-icon icon-comment">
+                                <i class="fa fa-heart" title="回复"></i>
+                            </span>
+                            <span class="replies">此处为点赞数目，功能待补充</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            `;
+            return t;
+        };
+
         var scrollTop = function () {
             var button = $('#id-button-scroll');
             button.on('click', function () {
@@ -218,11 +285,14 @@
 
         var __main = function () {
             scrollTop();
-            timeTsf()
+            timeTsf();
+            addComment()
         };
 
         $(document).ready(function () {
             __main()
-        })
+        });
+
+        //$(window).scroll(switchFrom);
     </script>
 {% endblock %}

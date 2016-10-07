@@ -46,7 +46,7 @@ def register():
             if u.valid():
                 log('注册成功，已跳转到内容页面')
                 u.save()
-                r['next'] = url_for('timeline.timeline_view')
+                r['next'] = url_for('timeline.show_view')
                 session.permanent = True
                 session['user_id'] = u.id
             else:
@@ -63,3 +63,25 @@ def register():
         r['message'] = '用户名或密码不合规范，需重新输入'
     return jsonify(r)
 
+
+@main.route('/comment', methods=['POST'])
+def comment_add():
+    form = request.get_json()
+    comment = Comment(form)
+    u = current_user()
+    log('debug current user:', u)
+    if u is not None:
+        comment.user_id = u.id
+        comment.save()
+        current_username = u.username
+        response = {
+            'success': True,
+            'content': comment.content,
+            'created_time': comment.created_time,
+            'current_username': current_username,
+        }
+    else:
+        response = {
+            'success': False,
+        }
+    return jsonify(response)

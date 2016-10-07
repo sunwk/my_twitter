@@ -6,6 +6,7 @@ main = Blueprint('tweet', __name__)
 @main.route('/<int:tweet_id>')
 def tweet_view(tweet_id):
     u = current_user()
-    tweet=Tweet.query.filter_by(id=tweet_id).first()
+    tweet = Tweet.query.filter_by(id=tweet_id).first()
     comments = tweet.comments
+    comments.sort(key=lambda t: t.created_time, reverse=True)
     return render_template('tweet_detail.html', tweet=tweet, user=u, comments=comments)
