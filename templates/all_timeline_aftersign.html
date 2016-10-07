@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="../static/css/twitter.css">
     <link rel="stylesheet" href="../static/css/xiunoui.css">
+    <script src="../static/js/jquery-3.0.0.min.js"></script>
 {% endblock %}
 {% block body %}
     {{ super() }}
@@ -17,8 +18,8 @@
 
             <ol class="reply-items" id="postlist">
             {% for tweet in tweets %}
-                    <li class="stream-item">
-                        <div class="stream-content" href="{{ url_for('tweet.tweet_view', tweet_id=tweet.id) }}">
+                <li class="stream-item" data-tweet_url="{{ url_for('tweet.tweet_view', tweet_id=tweet.id) }}">
+                        <div class="stream-content">
                             <a href="{{ url_for('timeline.self_timeline_view', user_id=tweet.user.id) }}" class="item-user">
                                 <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
                                      width="48px"
@@ -46,6 +47,34 @@
                         </div>
                     </li>
             {% endfor %}
+                <li class="stream-item" data-tweet_url="aaaa">
+                        <div class="stream-content" href="aaa">
+                            <a href="#" class="item-user">
+                                <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
+                                     width="48px"
+                                     height="48px">
+                                <strong class="item-nickname">aaaa</strong>
+                            </a>
+                            <small class="time" title="发帖时间">
+                                aaa
+                            </small>
+                            <p class="item-message">
+                                aaa
+                            </p>
+                            <div class="post-actions">
+                                <a href="#" title="1 回复">
+                                    <span class="web-icon icon-comment">
+                                        <i class="fa fa-comment" title="回复"></i>
+                                    </span>
+                                    <span class="replies">aaa</span>
+                                </a>
+    {#                                <span class="like" title="0 喜欢">#}
+    {#                                    <i class="fa fa-heart" title="喜欢"></i>#}
+    {#                                    <span class="likes">0</span>#}
+    {#                                </span>#}
+                            </div>
+                        </div>
+                    </li>
             </ol>
 
             <div class="stream-footer">
@@ -147,4 +176,28 @@
         </div>
         <div class="clear"></div>
     </div>
+    <script>
+
+    
+        var tweetClick = function () {
+            var i = $('.stream-item');
+            i.each(function () {
+                var tweetDetail = function () {
+                window.location.href = url
+            };
+                var current_i = this;
+                var div = $(current_i).children();
+                var url = $(current_i).data('tweet_url');
+                div.on('click', tweetDetail)
+            })
+        };
+
+        var __main = function () {
+            tweetClick()
+        };
+
+        $(document).ready(function () {
+            __main()
+        })
+    </script>
 {% endblock %}
