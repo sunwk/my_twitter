@@ -24,10 +24,10 @@
                                 <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
                                      width="48px"
                                      height="48px">
-                                <strong class="item-nickname">{{ tweet.user.username }}</strong>
+                                <strong class="item-nickname">{{ tweet.user.username }} </strong>
                             </a>
                             <small class="time" title="发帖时间">
-                                {{ tweet.created_time }}
+                                发表于 <time>{{ tweet.created_time }}</time>
                             </small>
                             <p class="item-message">
                                 {{ tweet.content }}
@@ -56,7 +56,7 @@
                                 <strong class="item-nickname">aaaa</strong>
                             </a>
                             <small class="time" title="发帖时间">
-                                aaa
+                                <time>12434573</time>
                             </small>
                             <p class="item-message">
                                 aaa
@@ -199,9 +199,25 @@
             })
         };
 
+        var timeTsf = function () {
+            var unixTime = $('time');
+            for (var i = 0; i < unixTime.length; i++) {
+                var t = $(unixTime[i]).text();
+                var date = new Date(Number(t)*1000);
+                var Y = date.getFullYear() + '-';
+                var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                var D = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + ' ';
+                var h = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ':';
+                var m = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ':';
+                var s = date.getSeconds();
+                $(unixTime[i]).text(Y + M + D + h + m + s);
+            }
+        };
+
         var __main = function () {
             tweetClick();
-            scrollTop()
+            scrollTop();
+            timeTsf()
         };
 
         $(document).ready(function () {
