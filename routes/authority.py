@@ -31,15 +31,20 @@ def login_view():
 @main.route('/register', methods=['POST'])
 def register():
     u = User(request.form)
-    if u.valid():
-        log('注册成功，已跳转到timeline页面，并直接保持登录状态')
-        u.save()
-        session.permanent = True
-        session['user_id'] = u.id
-        return redirect(url_for('timeline.timeline_view'))
+    is_unique_user = len(User.query.filter_by(username=u.username).all()) == 0
+    if is_unique_user:
+        if u.valid():
+            log('注册成功，已跳转到timeline页面，并直接保持登录状态')
+            u.save()
+            session.permanent = True
+            session['user_id'] = u.id
+            return redirect(url_for('timeline.timeline_view'))
+        else:
+            log('用户名或密码不合规范，需重新输入')
+            flash('用户名或密码不合规范，需重新输入')
+            return redirect(url_for('auth.register_view'))
     else:
-        log('用户名或密码不合规范，需重新输入')
-        flash('用户名或密码不合规范，需重新输入')
+        flash('用户名已存在，再重新想一个把')
         return redirect(url_for('auth.register_view'))
 
 

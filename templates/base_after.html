@@ -95,12 +95,12 @@
 
                <div class="right-nav" id="user">
                    <div class="settings dropdown">
-                        <a href="#" id="settings">
+                        <a href="{{ url_for('edit.edit_view', user_id=user.id) }}" id="settings">
                             <img src="{{ url_for('static', filename='img/01.png') }}" class="nav-settings" width="32px" height="32">
                         </a>
                    </div>
                    <div class="write">
-                        <a class="write-btn" title="发帖" href="#">
+                        <a class="write-btn" title="发帖" href="{{ url_for('timeline.self_timeline_view', user_id=user.id) }}">
                             <small>发帖</small>
                         </a>
                    </div>
