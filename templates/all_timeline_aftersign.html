@@ -79,7 +79,7 @@
 
             <div class="stream-footer">
                 <div class="stream-end-inner">
-                    <button class="Button win-back">已加载全部回复，点击返回</button>
+                    <button id="id-button-scroll" class="Button win-back">已加载全部回复，点击返回</button>
                 </div>
             </div>
         </div>
@@ -192,8 +192,16 @@
             })
         };
 
+        var scrollTop = function () {
+            var button = $('#id-button-scroll');
+            button.on('click', function () {
+                $(window).scrollTop(0);
+            })
+        };
+
         var __main = function () {
-            tweetClick()
+            tweetClick();
+            scrollTop()
         };
 
         $(document).ready(function () {
