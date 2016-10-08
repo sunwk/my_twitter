@@ -16,3 +16,4 @@ class Tweet(db.Model, ModelMixin):
         super(Tweet, self).__init__()
         self.content = form.get('content', '')
         self.created_time = timestamp()
+        self.user_id = form.get('user_id', '')

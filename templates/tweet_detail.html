@@ -195,7 +195,7 @@
                 var fuckContent = fuckHtml(content_input.val());
                 var tweet_id = $('#id-div-tweet_id').data('tweet_id');
                 // 将换行替换成<br>标签
-                preparsedContent = fuckContent.replace(/\n/g, '<br>');//   /.../g 全局替换
+                var preparsedContent = fuckContent.replace(/\n/g, '<br>');//   /.../g 全局替换
                 var encoded_content = htmlEncode(preparsedContent);
                 console.log('encoded_content',encoded_content);
                 var data = {

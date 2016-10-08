@@ -85,3 +85,30 @@ def comment_add():
             'success': False,
         }
     return jsonify(response)
+
+
+@main.route('/tweet', methods=['POST'])
+def tweet_add():
+    form = request.get_json()
+    tweet = Tweet(form)
+    u = current_user()
+
+    log('debug current user:', u, len(tweet.comments))
+    if u is not None:
+        tweet.user_id = u.id
+        tweet.save()
+        current_username = u.username
+        response = {
+            'success': True,
+            'content': tweet.content,
+            'created_time': tweet.created_time,
+            'current_username': current_username,
+            'user_id': tweet.user_id,
+            'id': tweet.id,
+            'comments_num': len(tweet.comments)
+        }
+    else:
+        response = {
+            'success': False,
+        }
+    return jsonify(response)

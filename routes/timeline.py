@@ -19,9 +19,9 @@ def timeline_view():
 def self_timeline_view(user_id):
     user = User.query.filter_by(id=user_id).first()
     u = current_user()
-    log('debug current_user is:', u.id, u.username)
     if user is not None:
         if u is not None:
+            log('debug current_user is:', u.id, u.username)
             user.visitors_add()
             tweets = user.tweets
             tweets.sort(key=lambda t: t.created_time, reverse=True)
@@ -31,8 +31,7 @@ def self_timeline_view(user_id):
                 return render_template('self_timeline_aftersign.html', tweets=tweets, user=user)
             else:
                 return render_template('other_timeline.html', tweets=tweets, user=user)
-    else:
-        return redirect(url_for('timeline.timeline_view'))
+    return redirect(url_for('timeline.timeline_view'))
 
 # @main.route('/<user_id>')
 # def tweet_view(user_id):
