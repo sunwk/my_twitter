@@ -19,6 +19,7 @@ class User(db.Model, ModelMixin):
     signature = db.Column(db.String())
     visit = db.Column(db.Integer)
     sex = db.Column(db.String())
+    ip = db.Column(db.String())
 
     tweets = db.relationship('Tweet', backref='user')
     comments = db.relationship('Comment', backref='user')
@@ -31,6 +32,7 @@ class User(db.Model, ModelMixin):
             self.password = sha1_hashed(form.get('password', ''))
             self.signature = form.get('signature', '')
             self.sex = form.get('sex', '')
+            self.ip = form.get('ip', '')
 
     def visitors_add(self):
         self.visit += 1

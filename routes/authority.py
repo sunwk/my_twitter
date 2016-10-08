@@ -31,10 +31,12 @@ def login_view():
 @main.route('/register', methods=['POST'])
 def register():
     u = User(request.form)
+    ip_addr = request.remote_addr
     is_unique_user = len(User.query.filter_by(username=u.username).all()) == 0
     if is_unique_user:
         if u.valid():
             log('注册成功，已跳转到timeline页面，并直接保持登录状态')
+            u.ip = ip_addr
             u.save()
             session.permanent = True
             session['user_id'] = u.id

@@ -38,6 +38,7 @@ def register():
         'success': True
     }
     form = request.get_json()
+    ip_addr = request.remote_addr
     log('测试注册form', form)
     if form is not None:
         u = User(form)
@@ -45,8 +46,9 @@ def register():
         if is_unique_user:
             if u.valid():
                 log('注册成功，已跳转到内容页面')
+                u.ip = ip_addr
                 u.save()
-                r['next'] = url_for('timeline.show_view')
+                r['next'] = url_for('timeline.timeline_view')
                 session.permanent = True
                 session['user_id'] = u.id
             else:

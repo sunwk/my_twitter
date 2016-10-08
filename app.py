@@ -6,10 +6,8 @@ from models import db
 # 这里 import 具体的 Model 类是为了给 migrate 用
 # 如果不 import 那么无法迁移
 # 这是 SQLAlchemy 的机制
-from models.todo import Todo
+
 from models.user import User
-from models.node import Node
-from models.topic import Topic
 from models.tweet import Tweet
 from models.comment import Comment
 
@@ -23,7 +21,7 @@ from api.auth import main as api_auth
 
 
 app = Flask(__name__)
-db_path = 'todo.sqlite'
+db_path = 'db.sqlite'
 manager = Manager(app)
 
 
