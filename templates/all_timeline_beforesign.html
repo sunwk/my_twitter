@@ -146,6 +146,24 @@
     </div>
 
     <script>
+        var htmlDecode = function(str) {
+            var div = document.createElement("div");
+            div.innerHTML = str;
+            return div.innerText;
+        };
+
+
+        var tweetDecode = function () {
+            var comments = $('.item-message');
+            for (var i=0; i<comments.length; i++){
+                var comment = htmlDecode(comments[i].innerText);
+                console.log(comment);
+                //document.getElementsByClassName('item-message')[i].innerText=comment;
+                $(comments[i]).html(comment)
+            }
+        };
+
+
         var post = function (url, data) {
             var request = {
                 url: url,
@@ -241,7 +259,8 @@
             register();
             tweetClick();
             scrollTop();
-            timeTsf()
+            timeTsf();
+            tweetDecode()
         };
 
         $('document').ready(function () {

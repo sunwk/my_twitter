@@ -19,22 +19,22 @@
 
             <ol class="reply-items" id="postlist">
                 {% for tweet in tweets %}
-                <li class="stream-item">
+                <li class="stream-item" data-tweet_url="{{ url_for('tweet.tweet_view', tweet_id=tweet.id) }}">
                     <div class="stream-content" href="thread-142.htm">
                         <a href="#" class="item-user">
                             <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
                                  width="48px"
                                  height="48px">
-                            <strong class="item-nickname">{{ user.username }}</strong>
+                            <strong class="item-nickname">{{ user.username }} </strong>
                         </a>
                         <small class="time" title="发帖时间">
-                            {{ tweet.created_time }}
+                            发表于 <time>{{ tweet.created_time }}</time>
                         </small>
                         <p class="item-message">
                             {{ tweet.content }}
                         </p>
                         <div class="post-actions">
-                            <a href="#" title="1 回复">
+                            <a>
                                 <span class="web-icon icon-comment">
                                     <i class="fa fa-comment" title="回复"></i>
                                 </span>
@@ -52,7 +52,7 @@
 
             <div class="stream-footer">
                 <div class="stream-end-inner">
-                    <button class="Button win-back">已加载全部回复，点击返回</button>
+                    <button id="id-button-scroll" class="Button win-back">已加载全部回复，点击返回</button>
                 </div>
             </div>
         </div>
@@ -94,7 +94,7 @@
 {#            登陆后#}
             <div class="mini-profile">
                 <div class="profile-summary">
-                    <a href="#">
+                    <a href="{{ url_for('timeline.self_timeline_view', user_id=user.id) }}">
                         <div class="profile-content">
                             <img src="{{ url_for('static', filename='img/01.png') }}">
                             <b>{{ user.username }}</b>
@@ -146,4 +146,186 @@
         </div>
         <div class="clear"></div>
     </div>
+
+    <script>
+
+
+        var htmlEncode = function(str) {
+            var div = document.createElement("div");
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        };
+
+        var htmlDecode = function(str) {
+            var div = document.createElement("div");
+            div.innerHTML = str;
+            return div.innerText;
+        };
+
+        var fuckHtml = function (str) {
+            str = str.replace(/<\/?[^>]*>/g,''); //去除HTML tag
+            str.value = str.replace(/[ | ]*\n/g,'\n'); //去除行尾空白
+            //str = str.replace(/\n[\s| | ]*\r/g,'\n'); //去除多余空行
+            return str;
+        };
+
+        var addTweet = function () {
+            console.log('ready');
+            var button = $('#id-button-submit');
+            var content_input = $('#id-input-content');
+            button.on('click', function () {
+                // 去掉html标签，ajax动态插入会直接插成html破坏格式。需动态插入带标签的文字较复杂，先不考虑
+                var fuckContent = fuckHtml(content_input.val());
+                var user_id = $('#id-div-user_id').data('user_id');
+                // 将换行替换成<br>标签
+                var preparsedContent = fuckContent.replace(/\n/g, '<br>');//   /.../g 全局替换
+                var encoded_content = htmlEncode(preparsedContent);
+                console.log('encoded_content',encoded_content);
+                var data = {
+                    content: encoded_content,
+                    user_id: user_id
+                };
+                var json_data = JSON.stringify(data);
+                console.log('debug json_data :', json_data);
+                var request = {
+                    url: "{{ url_for('api.tweet_add') }}",
+                    contentType: 'application/json',
+                    type: 'post',
+                    data: json_data,
+                    success: function (r) {
+                        console.log('服务器返回了:', r);
+                        if (r.success){
+                            //r.content = preparsedContentend; 之前的思路：发后端的和插入的可以不一样
+                            insertTweet(r)
+                        }else {
+                            alert('请先注册登录再评论')
+                        }
+                    }
+                };
+                $.ajax(request);
+            })
+        };
+
+
+        var insertTweet = function (tweet) {
+                var t = commentTemplate(tweet);
+                $('#postlist').prepend(t);
+            };
+
+        var dateTime = function (time) {
+            var t = time;
+            var date = new Date(Number(t)*1000);
+            var Y = date.getFullYear() + '-';
+            var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+            var D = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + ' ';
+            var h = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ':';
+            var m = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ':';
+            var s = date.getSeconds();
+            return Y + M + D + h + m + s;
+        };
+
+
+        var commentTemplate = function (tweet) {
+            var user_url = $('#id-div-user_url').data('user_url');
+            var img_url = $('#id-div-img_url').data('img_url');
+            var content = htmlDecode(tweet.content);
+            var created_time = tweet.created_time;
+            var time = dateTime(created_time);
+            var username = tweet.current_username;
+            var parsed_time = tweet.created_time;
+            var user_id = tweet.user_id;
+            var tweet_id = tweet.id;
+            var comments_num = tweet.comments_num;
+            var t = `
+                <li class="stream-item" data-tweet_url="/tweet/${tweet_id}">
+                    <div class="stream-content" href="thread-142.htm">
+                        <a href="${user_url}" class="item-user">
+                            <img class="item-avatar" src="${img_url}" alt="游客"
+                                 width="48px"
+                                 height="48px">
+                            <strong class="item-nickname">${username} </strong>
+                        </a>
+                        <small class="time" title="发帖时间">
+                            发表于 <time>${time}</time>
+                        </small>
+                        <p class="item-message">
+                            ${content}
+                        </p>
+                        <div class="post-actions">
+                            <a>
+                                <span class="web-icon icon-comment">
+                                    <i class="fa fa-comment" title="回复"></i>
+                                </span>
+                                <span class="replies">${comments_num}</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            `;
+            return t;
+        };
+
+        var tweetDecode = function () {
+            var comments = $('.item-message');
+            for (var i=0; i<comments.length; i++){
+                var comment = htmlDecode(comments[i].innerText);
+                console.log(comment);
+                //document.getElementsByClassName('item-message')[i].innerText=comment;
+                $(comments[i]).html(comment)
+            }
+        };
+
+
+
+
+
+
+        var tweetClick = function () {
+            var i = $('.stream-item');
+            i.each(function () {
+                var tweetDetail = function () {
+                window.location.href = url
+            };
+                var current_i = this;
+                var div = $(current_i).children();
+                var url = $(current_i).data('tweet_url');
+                div.on('click', tweetDetail)
+            })
+        };
+
+        var scrollTop = function () {
+            var button = $('#id-button-scroll');
+            button.on('click', function () {
+                $(window).scrollTop(0);
+            })
+        };
+
+        var timeTsf = function () {
+            var unixTime = $('time');
+            for (var i = 0; i < unixTime.length; i++) {
+                var t = $(unixTime[i]).text();
+                var date = new Date(Number(t)*1000);
+                var Y = date.getFullYear() + '-';
+                var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                var D = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + ' ';
+                var h = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ':';
+                var m = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ':';
+                var s = date.getSeconds();
+                $(unixTime[i]).text(Y + M + D + h + m + s);
+            }
+        };
+
+        var __main = function () {
+            tweetClick();
+            scrollTop();
+            timeTsf();
+            addTweet();
+            tweetDecode()
+        };
+
+        $(document).ready(function () {
+            __main()
+        })
+    </script>
+
 {% endblock %}

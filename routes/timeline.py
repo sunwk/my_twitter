@@ -28,9 +28,9 @@ def self_timeline_view(user_id):
             log('debug user id  u id', user_id, u.id, type(u.id), type(user_id), u.id == user_id, session.items())
             if u.id == user_id:
                 log('走这里')
-                return render_template('self_timeline_aftersign.html', tweets=tweets, user=user)
+                return render_template('self_timeline_aftersign.html', tweets=tweets, user=u)
             else:
-                return render_template('other_timeline.html', tweets=tweets, user=user)
+                return render_template('other_timeline.html', tweets=tweets, user=u)
     return redirect(url_for('timeline.timeline_view'))
 
 # @main.route('/<user_id>')

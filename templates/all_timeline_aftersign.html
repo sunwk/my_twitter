@@ -177,7 +177,28 @@
         <div class="clear"></div>
     </div>
     <script>
+        var htmlEncode = function(str) {
+            var div = document.createElement("div");
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        };
 
+        var htmlDecode = function(str) {
+            var div = document.createElement("div");
+            div.innerHTML = str;
+            return div.innerText;
+        };
+
+
+        var tweetDecode = function () {
+            var comments = $('.item-message');
+            for (var i=0; i<comments.length; i++){
+                var comment = htmlDecode(comments[i].innerText);
+                console.log(comment);
+                //document.getElementsByClassName('item-message')[i].innerText=comment;
+                $(comments[i]).html(comment)
+            }
+        };
     
         var tweetClick = function () {
             var i = $('.stream-item');
@@ -217,7 +238,8 @@
         var __main = function () {
             tweetClick();
             scrollTop();
-            timeTsf()
+            timeTsf();
+            tweetDecode()
         };
 
         $(document).ready(function () {
