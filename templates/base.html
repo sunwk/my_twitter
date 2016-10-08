@@ -75,20 +75,20 @@
                         <!-- </a> -->
                     </li>
                     <li class="ml15">
-                        <a class="logo" title="首页" href="{{ url_for('timeline.timeline_view') }}"> 首页 <i class="newthreads">0</i></a>
+                        <a class="logo" title="首页" href="{{ url_for('timeline.timeline_view') }}"> 首页 </a>
                     </li>
                     <li>
                         {% if user %}
-                            <a href="{{ url_for('timeline.self_timeline_view', user_id = user.id) }}">个人主页 <i class="newthreads">0</i></a>
+                            <a href="{{ url_for('timeline.self_timeline_view', user_id = user.id) }}">个人主页 </a>
                         {% else %}
-                            <a href="{{ url_for('auth.register_view') }}">个人主页 <i class="newthreads">0</i></a>
+                            <a href="{{ url_for('auth.register_view') }}">个人主页 </a>
                         {% endif %}
                     </li>
                     <li>
-                      <a href="#">关注 <i class="newthreads">0</i></a>
+                      <a href="#">关注 </a>
                     </li>
                     <li>
-                      <a href="#">被关注 <i class="newthreads">0</i></a>
+                      <a href="#">被关注 </a>
                     </li>
                 </ul>
                 <div class="right-nav" id="user">
