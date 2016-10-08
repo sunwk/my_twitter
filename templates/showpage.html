@@ -146,7 +146,7 @@
                 password: password
             };
             var parsed_data = JSON.stringify(data);
-            var url = '/api/login';
+            var url = '{{ url_for('auth.login') }}';
             post(url, parsed_data)
         };
 
@@ -160,7 +160,7 @@
             };
             console.log('注册账户密码', data);
             var parsed_data = JSON.stringify(data);
-            var url = '/api/register';
+            var url = '{{ url_for('auth.register') }}';
             post(url, parsed_data)
         };
 

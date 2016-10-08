@@ -2,7 +2,8 @@
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/twitter.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/xiunoui.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/xiunoui.css') }}">
+    <script src="../static/js/jquery-3.0.0.min.js"></script>
 {% endblock %}
 {% block body %}
     {{ super() }}
@@ -25,12 +26,12 @@
                             <small>{{ user.signature }}</small>
                         </div>
                         <div class="right">
-                            <input type="file" id="avatar_upload" accept=".jpg,.jpeg,.png,.gif,.bmp" class="upload" style="width:70px; opacity:0.7" value="更换头像"/>
+                            <input type="file" id="avatar_upload" accept=".jpg,.jpeg,.png,.gif,.bmp" class="upload Button Button--primary" style="width:70px; opacity:0.7" value="更换头像"/>
                             <div style="width:100%; height:6px; border:1px border #64ACA0; margin:2px 0;" id="avatar_progress">
                                 <div style="width: 0px;  height: 6px; background: #64ACA0;">
                                 </div>
                             </div>
-                            <button class="Button Button--primary" type="submit" loading-text="正在提交...">保存</button>
+                            <button id="id-button-submit" class="Button Button--primary" type="button" loading-text="正在提交...">保存</button>
                         </div>
                     </div>
                 </div>
@@ -38,67 +39,33 @@
             <div class="content-inner">
                 <dl class="user-profile">
                     <dt>用户名</dt>
-                    <dd><input class="form-control" type="text" name="username" value="{{ user.username }}"></dd>
+                    <dd><input id="id-input-username" class="form-control" type="text" name="username" value="{{ user.username }}"></dd>
                     <dt>邮箱</dt>
-                    <dd style="margin-top: 5px;"><input class="form-control" type="text" name="email" value="{{ user.username }}"></dd>
+                    <dd><input id="id-input-email" class="form-control" type="text" name="email" value="{{ user.email }}"></dd>
                     <dt>个性签名</dt>
-                    <dd><input class="form-control" type="text" name="username" value="{{ user.signature }}"></dd>
+                    <dd><input id="id-input-signature" class="form-control" type="text" name="signature" value="{{ user.signature }}"></dd>
+                    <dt>性别</dt>
+                    <dd><input id="id-input-sex" class="form-control" type="text" name="sex" value="{{ user.signature }}"></dd>
                     <dt>用户组</dt>
-                    <dd>一级用户组</dd>
+                    <dd>{{ user.role }}</dd>
                     <dt>注册时间</dt>
-                    <dd>{{ user.created_time }}</dd>
+                    <dd><time>{{ user.created_time }}</time></dd>
                     <dt>注册IP</dt>
                     <dd>{{ user.ip }}</dd>
-{#                    <dt>最后登录</dt>#}
-{#                    <dd>2016-10-04</dd>#}
-{#                    <dt>主题</dt>#}
-{#                    <dd>1</dd>#}
                     <dt>帖子</dt>
                     <dd>{{ user.tweets | length }}</dd>
-                    <dt>喜欢</dt>
-                    <dd>0</dd>
-                    <dt>被喜欢</dt>
-                    <dd>0</dd>
+                    <dt>来访</dt>
+                    <dd>{{ user.visit }}</dd>
+                    <dt>关注</dt>
+                    <dd>功能未做</dd>
+                    <dt>被关注</dt>
+                    <dd>功能未做</dd>
                 </dl>
             </div>
         </div>
     </div>
     </form>
         <div class="dashboard">
-{#            登录框#}
-{#            <div class="mini-profile">#}
-{#                <div class="profile-summary">#}
-{#                    <div class="profile-content">#}
-{#                        <img src="{{ url_for('static', filename='img/01.png') }}">#}
-{#                        <b>游客</b>#}
-{#                        <small>登录后才能发帖哦~</small>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="profile-bottom">#}
-{#                    <div class="user-intro">#}
-{#                        <div class="signin-wrapper">#}
-{#                            <form class="signin" method="POST" id="login_form" action="#">#}
-{#                                <fieldset>#}
-{#                                    <div class="field">#}
-{#                                        <input class="form-control" type="text" maxlength="26" name="account"#}
-{#                                               placeholder="邮件地址或昵称">#}
-{#                                    </div>#}
-{#                                    <div class="field">#}
-{#                                        <input class="form-control" type="password" maxlength="16" name="password"#}
-{#                                               placeholder="密码">#}
-{#                                    </div>#}
-{#                                </fieldset>#}
-{#                                <div class="clearfix">#}
-{#                                    <button type="submit" class="Button Button--primary">#}
-{#                                        登录#}
-{#                                    </button>#}
-{#                                </div>#}
-{#                            </form>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            登陆后#}
             <div class="mini-profile">
                 <div class="profile-summary">
                     <a href="#">
@@ -111,10 +78,14 @@
                 </div>
                 <div class="profile-bottom">
                     <div class="user-intro">
-                        {{ user.signature }}
+                        {% if user.signature %}
+                            {{ user.signature }}
+                        {% else %}
+                              快点下边设置你的个性签名
+                        {% endif %}
                     </div>
                     <div class="profile-bottom">
-                        <a href="#" class="notify-count">
+                        <a href="{{ url_for('edit.edit_view', user_id=user.id) }}" class="notify-count">
                             <i class="fa fa-edit"></i>设置
                         </a>
                         <a href="{{ url_for('auth.logout') }}" class="balance-count">
@@ -152,4 +123,73 @@
         </div>
         <div class="clear"></div>
     </div>
+
+    <script>
+        var post = function (url, data) {
+            var request = {
+                url: url,
+                type: 'post',
+                data: data,
+                contentType: 'application/json',
+                success: function (r) {
+                    if (r.success) {
+                        alert('aaa')
+                        location.href = r.next
+                    }else {
+                        alert(r.message)
+                    }
+                }
+            };
+            $.ajax(request);
+        };
+
+        var submitInfo = function () {
+            console.log('点击注册');
+            var username = $('#id-input-username').val();
+            var email = $('#id-input-email').val();
+            var signature = $('#id-input-signature').val();
+            var sex = $('#id-input-sex').val();
+
+            var data = {
+                username: username,
+                email: email,
+                signature: signature,
+                sex: sex
+            };
+            console.log('更改用户信息', data);
+            var parsed_data = JSON.stringify(data);
+            var url = '{{ url_for('api.info_edit') }}';
+            post(url, parsed_data)
+        };
+
+        var changeInfo = function () {
+            var button = $('#id-button-submit');
+            button.on('click', submitInfo)
+        };
+
+        var timeTsf = function () {
+            var unixTime = $('time');
+            for (var i = 0; i < unixTime.length; i++) {
+                var t = $(unixTime[i]).text();
+                var date = new Date(Number(t)*1000);
+                var Y = date.getFullYear() + '-';
+                var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                var D = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + ' ';
+                var h = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ':';
+                var m = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ':';
+                var s = date.getSeconds();
+                $(unixTime[i]).text(Y + M + D + h + m + s);
+            }
+        };
+
+        var __main = function () {
+            changeInfo();
+            timeTsf()
+        };
+
+        $('document').ready(function () {
+            __main()
+        })
+    </script>
+
 {% endblock %}

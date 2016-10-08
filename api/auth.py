@@ -114,3 +114,39 @@ def tweet_add():
             'success': False,
         }
     return jsonify(response)
+
+
+@main.route('/edit', methods=['POST'])
+def info_edit():
+    form = request.get_json()
+    u = User(form)
+    log('!!!!!!!!!!!!!', u.json(),url_for('timeline.timeline_view'))
+    user = current_user()
+    response = user.json()
+    is_unique_user = len(User.query.filter_by(username=u.username).all()) == 0
+    if u is not None:
+        if is_unique_user:
+            user.username = u.username
+            user.email = u.email
+            user.signature = u.signature
+            user.sex = u.sex
+            current_username = user.username
+            response['success'] = True
+            response['next'] = url_for('timeline.timeline_view')
+            # response = {
+            #     'success': True,
+            #     'content': tweet.content,
+            #     'created_time': tweet.created_time,
+            #     'current_username': current_username,
+            #     'user_id': tweet.user_id,
+            #     'id': tweet.id,
+            #     'comments_num': len(tweet.comments)
+            # }
+        else:
+            response['success'] = False,
+            response['message'] = '该用户名已经被其他人征用啦~~换一个吧'
+    else:
+        response['success'] = False,
+        response['message'] = '未登录提交无效'
+    log(response)
+    return jsonify(response)

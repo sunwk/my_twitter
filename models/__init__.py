@@ -24,3 +24,10 @@ class ModelMixin(object):
         db.session.commit()
         # self.deleted = True
         # self.save()
+
+    def json(self):
+        # Model 是延迟载入的, 如果没有引用过数据, 就不会从数据库中加载
+        # 引用一下 id 这样数据就从数据库中载入了
+        self.id
+        d = {k: v for k, v in self.__dict__.items() if k not in ('_sa_instance_state', 'user')}
+        return d
