@@ -130,6 +130,7 @@ def info_edit():
             user.email = u.email
             user.signature = u.signature
             user.sex = u.sex
+            user.save()
             current_username = user.username
             response['success'] = True
             response['next'] = url_for('timeline.timeline_view')
@@ -143,7 +144,7 @@ def info_edit():
             #     'comments_num': len(tweet.comments)
             # }
         else:
-            response['success'] = False,
+            response['success'] = False
             response['message'] = '该用户名已经被其他人征用啦~~换一个吧'
     else:
         response['success'] = False,

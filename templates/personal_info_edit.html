@@ -41,7 +41,7 @@
                     <dt>用户名</dt>
                     <dd><input id="id-input-username" class="form-control" type="text" name="username" value="{{ user.username }}"></dd>
                     <dt>邮箱</dt>
-                    <dd><input id="id-input-email" class="form-control" type="text" name="email" value="{{ user.email }}"></dd>
+                    <dd><input id="id-input-email" class="form-control" type="email" name="email" value="{{ user.email }}"></dd>
                     <dt>个性签名</dt>
                     <dd><input id="id-input-signature" class="form-control" type="text" name="signature" value="{{ user.signature }}"></dd>
                     <dt>性别</dt>
@@ -133,7 +133,6 @@
                 contentType: 'application/json',
                 success: function (r) {
                     if (r.success) {
-                        alert('aaa')
                         location.href = r.next
                     }else {
                         alert(r.message)
