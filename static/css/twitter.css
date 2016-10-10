@@ -489,10 +489,11 @@ a:focus{
 .mini-profile .profile-bottom .notify-count,
 .mini-profile .profile-bottom .favorite-count,
 .mini-profile .profile-bottom .balance-count {
-    display:inline-block;
-    width:80px;
-    border-right:1px solid #e1e8ed;
-    padding:10px 0 10px 12px;
+    display: inline-block;
+    width: 127px;
+    border-right: 1px solid #e1e8ed;
+    padding: 10px 0 10px 12px;
+    text-align: center;
 }
 .mini-profile .profile-bottom .balance-count{
     border-right: none;
@@ -526,7 +527,8 @@ a:focus{
 .mini-profile .profile-bottom .fa {
     display: block;
     margin-bottom: 2px;
-    color:#777;
+    margin-left: 1px;
+    color: #777;
     font-size: 20px;
 }
 .mini-profile .profile-bottom a:hover .fa{
@@ -1063,7 +1065,7 @@ a:focus{
     border-bottom:1px solid #e1e8ed;
 }
 .stream-item .stream-content{
-    padding:5px 12px;
+    padding: 5px 30px;
     min-height:51px;
     cursor:pointer;
 }

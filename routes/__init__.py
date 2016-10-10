@@ -7,9 +7,11 @@ from flask import send_from_directory
 from flask import session
 from flask import url_for
 from flask import abort
+from flask import flash
 
 from models.user import User
 from models.tweet import Tweet
+
 
 import time
 
@@ -29,3 +31,17 @@ def current_user():
     user_id = session.get('user_id', '')
     user = User.query.filter_by(id=user_id).first()
     return user
+
+
+
+# from functools import wraps
+# def admin_required(f):
+#     @wraps(f)
+#     def function(*args, **kwargs):
+#         # your code
+#         print('admin required')
+#         if request.args.get('uid') != '1':
+#             print('not admin')
+#             abort(404)
+#         return f(*args, **kwargs)
+#     return function

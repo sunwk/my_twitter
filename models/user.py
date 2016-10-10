@@ -1,6 +1,6 @@
 import hashlib
 import os
-
+from . import timestamp
 from . import ModelMixin
 from . import db
 
@@ -19,8 +19,12 @@ class User(db.Model, ModelMixin):
     signature = db.Column(db.String())
     visit = db.Column(db.Integer)
     sex = db.Column(db.String())
+    ip = db.Column(db.String())
+    created_time = db.Column(db.String())
+    email = db.Column(db.String())
 
     tweets = db.relationship('Tweet', backref='user')
+    comments = db.relationship('Comment', backref='user')
 
     def __init__(self, form):
         super(User, self).__init__()
@@ -30,6 +34,9 @@ class User(db.Model, ModelMixin):
             self.password = sha1_hashed(form.get('password', ''))
             self.signature = form.get('signature', '')
             self.sex = form.get('sex', '')
+            self.ip = form.get('ip', '')
+            self.created_time = timestamp()
+            self.email = form.get('email', '')
 
     def visitors_add(self):
         self.visit += 1

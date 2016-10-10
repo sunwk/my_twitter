@@ -38,15 +38,15 @@
                                                 <input id="id-register-username" type="text" class="form-control"
                                                        placeholder="用户名大于三位">
                                                 <br>
-                                                <input id="id-register-password" type="text" class="form-control"
+                                                <input id="id-register-password" type="password" class="form-control"
                                                        placeholder="密码大于三位">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                    Close
+                                                    关闭
                                                 </button>
                                                 <button id="id-button-register" type="button" class="btn btn-primary">
-                                                    Submit
+                                                    提交
                                                 </button>
                                             </div>
 
@@ -79,15 +79,15 @@
                                                 <input id="id-login-username" type="text" class="form-control"
                                                        placeholder="请输入用户名">
                                                 <br>
-                                                <input id="id-login-password" type="text" class="form-control"
+                                                <input id="id-login-password" type="password" class="form-control"
                                                        placeholder="请输入密码">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                    Close
+                                                    关闭
                                                 </button>
                                                 <button id="id-button-login" type="button" class="btn btn-primary">
-                                                    Submit
+                                                    提交
                                                 </button>
                                             </div>
 
@@ -104,8 +104,8 @@
                                 </div>
                             </li>
                         </ul>
-                        <a href="{{ url_for('timeline.test_view') }}" type="button" class="btn btn-default btn-lg">游客入口</a>
-{#                        <a href="{{ url_for('timeline.tweet_view', user_id="1") }}" type="button" class="btn btn-default btn-lg">游客入口</a>#}
+                        <a href="{{ url_for('auth.logout') }}" type="button" class="btn btn-default btn-lg">游客浏览</a>
+{#                        <a href="{{ url_for('timeline.timeline_view')}}" type="button" class="btn btn-default btn-lg">游客入口</a>#}
 {#                        <button type="button" class="btn btn-default btn-lg">#}
 {#                            游客入口#}
 {#                        </button>#}
@@ -146,7 +146,7 @@
                 password: password
             };
             var parsed_data = JSON.stringify(data);
-            var url = '/api/login';
+            var url = '{{ url_for('auth.login') }}';
             post(url, parsed_data)
         };
 
@@ -160,7 +160,7 @@
             };
             console.log('注册账户密码', data);
             var parsed_data = JSON.stringify(data);
-            var url = '/api/register';
+            var url = '{{ url_for('auth.register') }}';
             post(url, parsed_data)
         };
 

@@ -7,6 +7,8 @@ from flask import jsonify
 from functools import wraps
 
 from models.user import User
+from models.comment import Comment
+from models.tweet import Tweet
 
 import time
 
@@ -16,8 +18,8 @@ main = Blueprint('api', __name__)
 # 通过 session 来获取当前登录的用户
 def current_user():
     # print('session, debug', session.permanent)
-    username = session.get('username', '')
-    u = User.query.filter_by(username=username).first()
+    user_id = session.get('user_id', '')
+    u = User.query.filter_by(id=user_id).first()
     return u
 
 

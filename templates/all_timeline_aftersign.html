@@ -1,0 +1,221 @@
+{% extends'base_after.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/twitter.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/xiunoui.css') }}" >
+    <script src="../static/js/jquery-3.0.0.min.js"></script>
+{% endblock %}
+{% block body %}
+    {{ super() }}
+
+    <div class="container">
+        <div class="content">
+            <div class="content-header">
+                <div class="tw-header-inner">
+                    <h2>新鲜事</h2>
+                </div>
+            </div>
+
+            <ol class="reply-items" id="postlist">
+            {% for tweet in tweets %}
+                <li class="stream-item" data-tweet_url="{{ url_for('tweet.tweet_view', tweet_id=tweet.id) }}">
+                        <div class="stream-content">
+                            <a href="{{ url_for('timeline.self_timeline_view', user_id=tweet.user.id) }}" class="item-user">
+                                <img class="item-avatar" src="{{ url_for('static', filename='img/01.png') }}" alt="游客"
+                                     width="48px"
+                                     height="48px">
+                                <strong class="item-nickname">{{ tweet.user.username }} </strong>
+                            </a>
+                            <small class="time" title="发帖时间">
+                                发表于 <time>{{ tweet.created_time }}</time>
+                            </small>
+                            <p class="item-message">
+                                {{ tweet.content }}
+                            </p>
+                            <div class="post-actions">
+                                <a href="#" title="1 回复">
+                                    <span class="web-icon icon-comment">
+                                        <i class="fa fa-comment" title="回复"></i>
+                                    </span>
+                                    <span class="replies">{{ tweet.comments | length}}</span>
+                                </a>
+    {#                                <span class="like" title="0 喜欢">#}
+    {#                                    <i class="fa fa-heart" title="喜欢"></i>#}
+    {#                                    <span class="likes">0</span>#}
+    {#                                </span>#}
+                            </div>
+                        </div>
+                    </li>
+            {% endfor %}
+            </ol>
+
+            <div class="stream-footer">
+                <div class="stream-end-inner">
+                    <button id="id-button-scroll" class="Button win-back">已加载全部回复，点击返回</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+{#            登录框#}
+{#            <div class="mini-profile">#}
+{#                <div class="profile-summary">#}
+{#                    <div class="profile-content">#}
+{#                        <img src="{{ url_for('static', filename='img/01.png') }}">#}
+{#                        <b>游客</b>#}
+{#                        <small>登录后才能发帖哦~</small>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="profile-bottom">#}
+{#                    <div class="user-intro">#}
+{#                        <div class="signin-wrapper">#}
+{#                            <form class="signin" method="POST" id="login_form" action="#">#}
+{#                                <fieldset>#}
+{#                                    <div class="field">#}
+{#                                        <input class="form-control" type="text" maxlength="26" name="account"#}
+{#                                               placeholder="邮件地址或昵称">#}
+{#                                    </div>#}
+{#                                    <div class="field">#}
+{#                                        <input class="form-control" type="password" maxlength="16" name="password"#}
+{#                                               placeholder="密码">#}
+{#                                    </div>#}
+{#                                </fieldset>#}
+{#                                <div class="clearfix">#}
+{#                                    <button type="submit" class="Button Button--primary">#}
+{#                                        登录#}
+{#                                    </button>#}
+{#                                </div>#}
+{#                            </form>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            登陆后#}
+            <div class="mini-profile">
+                <div class="profile-summary">
+                    <a href="{{ url_for('timeline.self_timeline_view', user_id=user.id) }}">
+                        <div class="profile-content">
+                            <img src="{{ url_for('static', filename='img/01.png') }}">
+                            <b>{{ user.username }}</b>
+                            <small>本网站第 <em>{{ user.id }}</em> 位超级酷炫至尊VIP</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="profile-bottom">
+                    <div class="user-intro">
+                        {% if user.signature %}
+                            {{ user.signature }}
+                        {% else %}
+                              快点下边设置你的个性签名
+                        {% endif %}
+                    </div>
+                    <div class="profile-bottom">
+                        <a href="{{ url_for('edit.edit_view', user_id=user.id) }}" class="notify-count">
+                            <i class="fa fa-edit"></i>设置
+                        </a>
+                        <a href="{{ url_for('auth.logout') }}" class="balance-count">
+                            <i class="fa fa-power-off"></i>退出
+                        </a>
+                    </div>
+                </div>
+            </div>
+{#            友情链接#}
+            <div class="text-list">
+            <div class="text-inner">
+                <div class="text-module-header">
+                    <h3>我觉得有趣的网站</h3>
+                </div>
+                <ul class="text-items text-items2">
+                    <li><a href="https://g.chenjx.cn/" target="_blank">Google镜像</a></li>
+                    <li><a href="https://knewone.com/" target="_blank">KnewOne购物</a></li>
+                    <li><a href="http://nipponcolors.com/" target="_blank">有你想要的所有颜色</a></li>
+                    <li><a href="http://weavesilk.com/" target="_blank">人人都是酷炫画家</a></li>
+                    <li><a href="http://www.alexandraposen.com/" target="_blank">好看的水彩画</a></li>
+                    <li><a href="http://www.csszengarden.com/" target="_blank">CSS禅意花园</a></li>
+                </ul>
+                </div>
+            </div>
+
+            <div class="site-footer">
+                <div class="footer-inner">
+                    <div class="footer-copyright">
+                        © 2016 <a href="http://www.github.com/sunwk" target="_blank">Avalon</a>
+                        <span class="point">♥</span> Powered by
+                        <a href="http://www.github.com/sunwk" target="_blank">No One</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <script>
+        var htmlEncode = function(str) {
+            var div = document.createElement("div");
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        };
+
+        var htmlDecode = function(str) {
+            var div = document.createElement("div");
+            div.innerHTML = str;
+            return div.innerText;
+        };
+
+
+        var tweetDecode = function () {
+            var comments = $('.item-message');
+            for (var i=0; i<comments.length; i++){
+                var comment = htmlDecode(comments[i].innerText);
+                console.log(comment);
+                //document.getElementsByClassName('item-message')[i].innerText=comment;
+                $(comments[i]).html(comment)
+            }
+        };
+    
+        var tweetClick = function () {
+            var i = $('.stream-item');
+            i.each(function () {
+                var tweetDetail = function () {
+                window.location.href = url
+            };
+                var current_i = this;
+                var div = $(current_i).children();
+                var url = $(current_i).data('tweet_url');
+                div.on('click', tweetDetail)
+            })
+        };
+
+        var scrollTop = function () {
+            var button = $('#id-button-scroll');
+            button.on('click', function () {
+                $(window).scrollTop(0);
+            })
+        };
+
+        var timeTsf = function () {
+            var unixTime = $('time');
+            for (var i = 0; i < unixTime.length; i++) {
+                var t = $(unixTime[i]).text();
+                var date = new Date(Number(t)*1000);
+                var Y = date.getFullYear() + '-';
+                var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                var D = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + ' ';
+                var h = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ':';
+                var m = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ':';
+                var s = date.getSeconds();
+                $(unixTime[i]).text(Y + M + D + h + m + s);
+            }
+        };
+
+        var __main = function () {
+            tweetClick();
+            scrollTop();
+            timeTsf();
+            tweetDecode()
+        };
+
+        $(document).ready(function () {
+            __main()
+        })
+    </script>
+{% endblock %}

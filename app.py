@@ -6,31 +6,30 @@ from models import db
 # 这里 import 具体的 Model 类是为了给 migrate 用
 # 如果不 import 那么无法迁移
 # 这是 SQLAlchemy 的机制
-from models.todo import Todo
-from models.user import User
-from models.node import Node
-from models.topic import Topic
-from models.tweet import Tweet
 
-from routes.todo import main as routes_todo
-from routes.node import main as routes_node
-from routes.topic import main as routes_topic
+from models.user import User
+from models.tweet import Tweet
+from models.comment import Comment
+
 from routes.showpage import main as routes_showpage
 from routes.timeline import main as routes_timeline
+from routes.authority import main as routes_auth
+from routes.tweet_detail import main as routes_detail
+from routes.edit import main as routes_edit
 
 from api.auth import main as api_auth
 
 
 app = Flask(__name__)
-db_path = 'todo.sqlite'
+db_path = 'db.sqlite'
 manager = Manager(app)
 
 
 def register_routes(app):
-    app.register_blueprint(routes_todo, url_prefix='/todo')
-    app.register_blueprint(routes_node, url_prefix='/node')
-    app.register_blueprint(routes_topic, url_prefix='/topic')
     app.register_blueprint(routes_timeline, url_prefix='/timeline')
+    app.register_blueprint(routes_auth, url_prefix='/auth')
+    app.register_blueprint(routes_edit, url_prefix='/edit')
+    app.register_blueprint(routes_detail, url_prefix='/tweet')
     app.register_blueprint(routes_showpage)
     app.register_blueprint(api_auth, url_prefix='/api')
 

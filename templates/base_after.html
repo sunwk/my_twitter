@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     {% block head %}
-    <title>My Tweet</title>
+    <title>Landing Page - Start Bootstrap Theme</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
@@ -91,12 +91,20 @@
                       <a href="#">被关注 </a>
                     </li>
                 </ul>
-                <div class="right-nav" id="user">
-                    <div class="signin">
-                        <a href="{{ url_for('auth.login_view') }}">登录</a>&nbsp;&nbsp;
-                        <a href="{{ url_for('auth.register_view') }}">注册</a>
-                    </div>
-                </div>
+
+
+               <div class="right-nav" id="user">
+                   <div class="settings dropdown">
+                        <a href="{{ url_for('edit.edit_view', user_id=user.id) }}" id="settings">
+                            <img src="{{ url_for('static', filename='img/01.png') }}" class="nav-settings" width="32px" height="32">
+                        </a>
+                   </div>
+                   <div class="write">
+                        <a class="write-btn" title="发帖" href="{{ url_for('timeline.self_timeline_view', user_id=user.id) }}">
+                            <small>发帖</small>
+                        </a>
+                   </div>
+               </div>
             </div>
         </div>
     {% endblock %}
