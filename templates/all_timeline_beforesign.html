@@ -190,7 +190,7 @@
                 password: password
             };
             var parsed_data = JSON.stringify(data);
-            var url = 'api/login';
+            var url = '{{ url_for('auth.login') }}';
             post(url, parsed_data)
         };
 

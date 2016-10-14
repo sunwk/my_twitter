@@ -44,7 +44,6 @@ def configured_app():
     return app
 
 
-
 @manager.command
 def server():
     print('server run')
