@@ -172,7 +172,7 @@
                 contentType: 'application/json',
                 success: function (r) {
                     if (r.success) {
-                        location.href = r.next
+                        location.href = '/twitter' + r.next
                     }else {
                         alert(r.message)
                     }
@@ -190,7 +190,7 @@
                 password: password
             };
             var parsed_data = JSON.stringify(data);
-            var url = '{{ url_for('auth.login') }}';
+            var url = '{{ url_for('api.login') }}';
             post(url, parsed_data)
         };
 
