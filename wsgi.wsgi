@@ -8,7 +8,7 @@ sys.path.insert(0, abspath(dirname(__file__)))
 print(abspath(dirname(__file__)))
 print(sys.path)
 
-from my_twitter import app
+import app
 
 application = app.configured_app()
 
