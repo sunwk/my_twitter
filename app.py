@@ -3,9 +3,6 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
 from models import db
-# 这里 import 具体的 Model 类是为了给 migrate 用
-# 如果不 import 那么无法迁移
-# 这是 SQLAlchemy 的机制
 
 from models.user import User
 from models.tweet import Tweet
@@ -47,7 +44,7 @@ def configured_app():
     return app
 
 
-# 自定义的命令行命令用来运行服务器
+
 @manager.command
 def server():
     print('server run')
@@ -61,9 +58,6 @@ def server():
 
 
 def configure_manager():
-    """
-    这个函数用来配置命令行选项
-    """
     Migrate(app, db)
     manager.add_command('db', MigrateCommand)
 
