@@ -49,7 +49,11 @@
                     <dt>用户组</dt>
                     <dd>{{ user.role }}</dd>
                     <dt>注册时间</dt>
+                    {% if user.created_time %}
                     <dd><time>{{ user.created_time }}</time></dd>
+                    {% else %}
+                    <dd><time>{{ '' }}</time></dd>
+                    {% endif %}
                     <dt>注册IP</dt>
                     <dd>{{ user.ip }}</dd>
                     <dt>帖子</dt>
