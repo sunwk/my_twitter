@@ -6,6 +6,8 @@ from os.path import dirname
 from my_twitter import app
 
 sys.path.insert(0, abspath(dirname(__file__)))
+print(abspath(dirname(__file__)))
+print(sys.path)
 
 application = app.configured_app()
 
