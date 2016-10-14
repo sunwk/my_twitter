@@ -172,7 +172,7 @@
                 contentType: 'application/json',
                 success: function (r) {
                     if (r.success) {
-                        location.href = '/twitter' + r.next
+                        location.href = r.next
                     }else {
                         alert(r.message)
                     }
