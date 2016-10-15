@@ -151,3 +151,42 @@ def info_edit():
         response['message'] = '未登录提交无效'
     log(response)
     return jsonify(response)
+
+
+@main.route('/follow', methods=['POST'])
+def follow():
+    form = request.get_json()
+    u = current_user()
+    r = {
+        'success': True,
+    }
+    if u is not None:
+        follow = Follow()
+        follow.followee_id = form.get('followee_id')
+        follow.follower_id = u.id
+        follow.save()
+    else:
+        r['success'] = False
+        r['message'] = '想关注，先登录！'
+    return jsonify(r)
+
+
+@main.route('/unfollow', methods=['POST'])
+def unfollow():
+    form = request.get_json()
+    followee_id = form.get('followee_id')
+    user = User.query.filter_by(id=followee_id).first()
+    u = current_user()
+    r = {
+        'success': True,
+    }
+    if u is not None:
+        follows = Follow.query.filter_by(followee_id=followee_id).all()
+        for follow in follows:
+            if follow.follower_id == u.id:
+                follow.delete()
+        return jsonify(r)
+    else:
+        r['success'] = False
+    return jsonify(r)
+

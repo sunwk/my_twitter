@@ -4,6 +4,7 @@ from flask_script import Manager
 
 from models import db
 
+from models.concern import Follow
 from models.user import User
 from models.tweet import Tweet
 from models.comment import Comment

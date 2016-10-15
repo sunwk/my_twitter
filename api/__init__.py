@@ -9,6 +9,7 @@ from functools import wraps
 from models.user import User
 from models.comment import Comment
 from models.tweet import Tweet
+from models.concern import Follow
 
 import time
 
