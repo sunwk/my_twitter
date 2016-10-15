@@ -85,10 +85,10 @@
                         {% endif %}
                     </li>
                     <li>
-                      <a href="#">关注 </a>
+                      <a href="{{ url_for('follow.followee_view') }}">关注 </a>
                     </li>
                     <li>
-                      <a href="#">被关注 </a>
+                      <a href="{{ url_for('follow.follower_view') }}">被关注 </a>
                     </li>
                 </ul>
 

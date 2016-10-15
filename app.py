@@ -14,6 +14,7 @@ from routes.timeline import main as routes_timeline
 from routes.authority import main as routes_auth
 from routes.tweet_detail import main as routes_detail
 from routes.edit import main as routes_edit
+from routes.follow import main as routes_follow
 
 from api.auth import main as api_auth
 
@@ -28,6 +29,7 @@ def register_routes(app):
     app.register_blueprint(routes_auth, url_prefix='/auth')
     app.register_blueprint(routes_edit, url_prefix='/edit')
     app.register_blueprint(routes_detail, url_prefix='/tweet')
+    app.register_blueprint(routes_follow, url_prefix='/follow')
     app.register_blueprint(routes_showpage)
     app.register_blueprint(api_auth, url_prefix='/api')
 

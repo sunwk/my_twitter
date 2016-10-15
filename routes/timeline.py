@@ -25,6 +25,7 @@ def self_timeline_view(user_id):
         if u is not None:
             log('debug current_user is:', u.id, u.username)
             user.visitors_add()
+            user.save()
             tweets = user.tweets
             tweets.sort(key=lambda t: t.created_time, reverse=True)
             log('debug user id  u id', user_id, u.id, type(u.id), type(user_id), u.id == user_id, session.items())
