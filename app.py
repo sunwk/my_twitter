@@ -20,7 +20,7 @@ from api.auth import main as api_auth
 
 
 app = Flask(__name__)
-db_path = 'db.sqlite'
+db_path = 'db'
 manager = Manager(app)
 
 
@@ -37,7 +37,7 @@ def register_routes(app):
 def configure_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     app.secret_key = 'secret key'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(db_path)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:187134@localhost/{}'.format(db_path)
     db.init_app(app)
     register_routes(app)
 
@@ -67,6 +67,6 @@ def configure_manager():
 if __name__ == '__main__':
     configure_manager()
     configure_app()
-    # manager.run()
-    app.run(debug=True)
+    manager.run()
+    # app.run(debug=True)
 # gunicorn -b '0.0.0.0:80' redischat:app

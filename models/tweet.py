@@ -6,8 +6,8 @@ from . import timestamp
 class Tweet(db.Model, ModelMixin):
     __tablename__ = 'tweets'
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String())
-    created_time = db.Column(db.String())
+    content = db.Column(db.String(100))
+    created_time = db.Column(db.String(100))
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comment', backref='tweet')

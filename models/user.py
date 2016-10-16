@@ -13,15 +13,15 @@ def sha1_hashed(s):
 class User(db.Model, ModelMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(), unique=True)
-    password = db.Column(db.String())
+    username = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(100))
     role = db.Column(db.Integer, default=2)
-    signature = db.Column(db.String())
+    signature = db.Column(db.String(100))
     visit = db.Column(db.Integer)
-    sex = db.Column(db.String())
-    ip = db.Column(db.String())
-    created_time = db.Column(db.String())
-    email = db.Column(db.String())
+    sex = db.Column(db.String(100))
+    ip = db.Column(db.String(100))
+    created_time = db.Column(db.String(100))
+    email = db.Column(db.String(100))
 
     tweets = db.relationship('Tweet', backref='user')
     comments = db.relationship('Comment', backref='user')
